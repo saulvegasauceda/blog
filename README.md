@@ -1,6 +1,6 @@
 # blog
 
-Personal blog
+Saul's personal blog
 
 ## Usage
 
