@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Content with notebooks &#8212; blog</title>
+    <title>Normalize counts &#8212; blog</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Markdown Files" href="markdown.html" />
@@ -122,7 +120,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Content with notebooks
+   Normalize counts
   </a>
  </li>
 </ul>
@@ -331,19 +329,36 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#markdown-notebooks">
-   Markdown + notebooks
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Normalize counts
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#before-running-magic">
+     Before running MAGIC
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#after-running-magic">
+     After running MAGIC
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#after-squaring-vals">
+     After squaring vals
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#merfish-vs-10x-pre-imputation">
+   MERFISH vs. 10x (pre-imputation)
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#myst-markdown">
-   MyST markdown
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#code-blocks-and-outputs">
-   Code blocks and outputs
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#raw-counts">
+   Raw counts
   </a>
  </li>
 </ul>
@@ -355,7 +370,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Content with notebooks</h1>
+                <h1>Normalize counts</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -365,19 +380,36 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#markdown-notebooks">
-   Markdown + notebooks
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Normalize counts
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#before-running-magic">
+     Before running MAGIC
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#after-running-magic">
+     After running MAGIC
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#after-squaring-vals">
+     After squaring vals
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#merfish-vs-10x-pre-imputation">
+   MERFISH vs. 10x (pre-imputation)
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#myst-markdown">
-   MyST markdown
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#code-blocks-and-outputs">
-   Code blocks and outputs
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#raw-counts">
+   Raw counts
   </a>
  </li>
 </ul>
@@ -390,84 +422,640 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="content-with-notebooks">
-<h1>Content with notebooks<a class="headerlink" href="#content-with-notebooks" title="Permalink to this headline">#</a></h1>
-<p>You can also create content with Jupyter Notebooks. This means that you can include
-code blocks and their outputs in your book.</p>
-<section id="markdown-notebooks">
-<h2>Markdown + notebooks<a class="headerlink" href="#markdown-notebooks" title="Permalink to this headline">#</a></h2>
-<p>As it is markdown, you can embed images, HTML, etc into your posts!</p>
-<p><img alt="" src="https://myst-parser.readthedocs.io/en/latest/_static/logo-wide.svg" /></p>
-<p>You can also <span class="math notranslate nohighlight">\(add_{math}\)</span> and</p>
-<div class="math notranslate nohighlight">
-\[
-math^{blocks}
-\]</div>
-<p>or</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{aligned}
-\mbox{mean} la_{tex} \\ \\
-math blocks
-\end{aligned}
-\end{split}\]</div>
-<p>But make sure you $Escape $your $dollar signs $you want to keep!</p>
-</section>
-<section id="myst-markdown">
-<h2>MyST markdown<a class="headerlink" href="#myst-markdown" title="Permalink to this headline">#</a></h2>
-<p>MyST markdown works in Jupyter Notebooks as well. For more information about MyST markdown, check
-out <a class="reference external" href="https://jupyterbook.org/content/myst.html">the MyST guide in Jupyter Book</a>,
-or see <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/">the MyST markdown documentation</a>.</p>
-</section>
-<section id="code-blocks-and-outputs">
-<h2>Code blocks and outputs<a class="headerlink" href="#code-blocks-and-outputs" title="Permalink to this headline">#</a></h2>
-<p>Jupyter Book will also embed your code blocks and output in your book.
-For example, here’s some sample Matplotlib code:</p>
-<div class="cell docutils container">
+  <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from matplotlib import rcParams, cycler
-import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import magic
+import pandas as pd 
+import seaborn as sns
+import scanpy as sc
 import numpy as np
-plt.ion()
+import scanpy.external as sce
+from numpy.random import seed
+from numpy.random import normal
+from random import sample
+from random import choices
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;contextlib.ExitStack at 0x7fe274b0a3a0&gt;
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">magic</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.15</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">magic</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">.magic</span> <span class="kn">import</span> <span class="n">MAGIC</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">.version</span> <span class="kn">import</span> <span class="n">__version__</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">magic.plot</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.15</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">magic</span><span class="o">/</span><span class="n">magic</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span> <span class="nn">sklearn.exceptions</span> <span class="kn">import</span> <span class="n">NotFittedError</span>
+<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">import</span> <span class="nn">graphtools</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">import</span> <span class="nn">numbers</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.15</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">graphtools</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">from_igraph</span><span class="p">,</span> <span class="n">read_pickle</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">.version</span> <span class="kn">import</span> <span class="n">__version__</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.15</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">graphtools</span><span class="o">/</span><span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">pygsp</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">tasklogger</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">base</span><span class="p">,</span> <span class="n">graphs</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">_logger</span> <span class="o">=</span> <span class="n">tasklogger</span><span class="o">.</span><span class="n">get_tasklogger</span><span class="p">(</span><span class="s2">&quot;graphtools&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">def</span> <span class="nf">Graph</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">data</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="n">n_pca</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="p">):</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.15</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">graphtools</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span><span class="p">,</span> <span class="n">TruncatedSVD</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">normalize</span>
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">sklearn.utils.graph</span> <span class="kn">import</span> <span class="n">graph_shortest_path</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="ne">ImportError</span>: cannot import name &#39;graph_shortest_path&#39; from &#39;sklearn.utils.graph&#39; (/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/sklearn/utils/graph.py)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Fixing random state for reproducibility
-np.random.seed(19680801)
-
-N = 10
-data = [np.logspace(0, 1, 100) + np.random.randn(100) + ii for ii in range(N)]
-data = np.array(data).T
-cmap = plt.cm.coolwarm
-rcParams[&#39;axes.prop_cycle&#39;] = cycler(color=cmap(np.linspace(0, 1, N)))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.stats import rv_discrete, rv_continuous
+from scipy.stats import nbinom
 
 
-from matplotlib.lines import Line2D
-custom_lines = [Line2D([0], [0], color=cmap(0.), lw=4),
-                Line2D([0], [0], color=cmap(.5), lw=4),
-                Line2D([0], [0], color=cmap(1.), lw=4)]
+# distribution plotting utilities
+def is_discrete(dist):
 
-fig, ax = plt.subplots(figsize=(10, 5))
-lines = ax.plot(data)
-ax.legend(custom_lines, [&#39;Cold&#39;, &#39;Medium&#39;, &#39;Hot&#39;]);
+    if hasattr(dist, &#39;dist&#39;):
+        return isinstance(dist.dist, rv_discrete)
+    else: return isinstance(dist, rv_discrete)
+
+def is_continuous(dist):
+
+    if hasattr(dist, &#39;dist&#39;):
+        return isinstance(dist.dist, rv_continuous)
+    else: return isinstance(dist, rv_continuous)
+
+def plot_distrib(distrib, title=None):
+
+    fig, ax = plt.subplots(1, 1)
+
+    if is_continuous(distrib):
+        x = np.linspace(distrib.ppf(0.001),
+                        distrib.ppf(0.999), 1000)
+        ax.plot(x, distrib.pdf(x), &#39;k-&#39;, lw=0.4)
+
+    elif is_discrete(distrib):
+        x = np.arange(distrib.ppf(0.01),
+                      distrib.ppf(0.99))
+        ax.plot(x, distrib.pmf(x), &#39;bo&#39;, ms=2, lw=0.4)
+
+    r = distrib.rvs(size=1000)
+    ax.hist(r, density=True, histtype=&#39;stepfilled&#39;, alpha=0.2, bins=200)
+
+    if title: ax.set_title(title)
+    fig_style_2(ax)
+    return ax
+
+def fig_style_2(ax):
+    for side in [&quot;right&quot;,&quot;top&quot;,&quot;left&quot;]: ax.spines[side].set_visible(False)
+    ax.get_yaxis().set_visible(False)
+
+
+
+
+Rna_species_characteristic_numbers = [1, 3, 10, 30, 100, 300, 1000, 3000, 10000]
+
+n = 100
+p = 0.5
+
+cell_generator = [nbinom(n, p) for n in Rna_species_characteristic_numbers]
+    
+def sample_cells(cell_generator, num=100): 
+    df = pd.DataFrame([dist.rvs(num) for dist in cell_generator]).T
+    df = df.set_axis([f&quot;Gene {g + 1}&quot; for g in range(len(df.columns))], axis=1, inplace=False)
+    return df
+
+
+synth_cells = sample_cells(cell_generator)
+
+sim_capture = lambda x, p: sum(choices([0, 1], weights=[1-p, p])[0] for _ in range(x))
+
+def simulate_capture_all_cells(true_cells, capture_rate):
+    return df.applymap(lambda x: sim_capture(x, p=capture_rate))
+
+    
+for i, row in df.iterrows():
+    
+    # row is a pd.Series
+    np.random.choice(row.values, replace=False)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_repr = simulate_capture_all_cells(synth_cells, 0.9)
+tenx_repr = simulate_capture_all_cells(synth_cells, 0.3)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def generate_synthetic_cells(mean=100, std=10, num_cells=1_000, num_genes=10, gene_coefficients = [1]):
+    &#39;&#39;&#39;
+    Generating a synthetic cell with genes expressed as a normal distribution w/ varying means
+    
+    mean = mean of norm distr
+    std = standard devation of norm distr
+    num_cells = number of cells 
+    num_genes = number of genes per cell
+    gene_coefficients = pool of gene_coefficients to resemble varying expression
+    &#39;&#39;&#39;
+    assert isinstance(gene_coefficients, list), &quot;gene_coefficients should be passed in as list&quot;
+    
+    gene_coeff = sample(gene_coeff,num_genes) # randomly samplying coefficients
+    data = {f&quot;Gene {g + 1}&quot;: normal(loc=gene_coeff[g]*mean, scale=std, size=size) 
+            for g in range(num_genes)}
+    data = pd.DataFrame(data)
+    data = data.abs() # remove any negative expression
+    return data
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def gen_synthetic_data(dataset, mean=100, std=10, size=1_000, num_genes=10):
+    data = {f&quot;Gene {g + 1}&quot;: normal(loc=gene_coeff[g]*mean, scale=std, size=size) 
+            for g in range(num_genes)}
+    data = pd.DataFrame(data)
+    data = data.abs()
+    return data
+
+def ready_for_plot():
+    merfish_repr[&quot;Model&quot;] = &quot;MERFISH&quot;
+    tenx_repr[&quot;Model&quot;] = &quot;10X synthetic&quot;
+    return pd.concat([merfish_repr, tenx_repr])
+
+def rescale_data(data, target_data, rescale):
+    if rescale == 0:
+        return data
+    else:
+        data[data &lt; 0] = 0
+        M99 = np.percentile(target_data, rescale, axis=0)
+        M100 = target_data.max(axis=0)
+        indices = np.where(M99 == 0)[0]
+        M99[indices] = M100[indices]
+        M99_new = np.percentile(data, rescale, axis=0)
+        M100_new = data.max(axis=0)
+        indices = np.where(M99_new == 0)[0]
+        M99_new[indices] = M100_new[indices]
+        max_ratio = np.divide(M99, M99_new)
+        data = np.multiply(data, np.tile(max_ratio,
+                                      (target_data.shape[0], 1)))
+        print(max_ratio)
+    return data
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pool = [1/4, 1/2, 2/3, 1, 4/3, 2, 4, 10, 20]
+MEAN = 100
+STD = 10
+SIZE = 1_000
+GENES = 10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># gene_coeff = [sample(pool,1)[0] for g in range(GENES)]
+# # pooling factors for genes
+
+# merfish_repr = gen_synthetic_data(0.9*MEAN, STD, SIZE, &quot;MERFISH&quot;, GENES)
+# tenx_repr = gen_synthetic_data(0.3*MEAN, STD, SIZE, &quot;10X synthetic&quot;, GENES)
+
+joint_data = ready_for_plot()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_rna_counts = merfish_repr.sum(axis=1)
+ax = merfish_rna_counts.plot.hist(bins=100)
+ax.axvline(merfish_rna_counts.median(), c=&#39;r&#39;)
+ax.set_title(f&#39;MERFISH RNA count for each cell. Median = {merfish_rna_counts.median()}&#39;)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/notebooks_2_0.png" src="_images/notebooks_2_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_99091/705731123.py:1: FutureWarning: Dropping of nuisance columns in DataFrame reductions (with &#39;numeric_only=None&#39;) is deprecated; in a future version this will raise TypeError.  Select only valid columns before calling the reduction.
+  merfish_rna_counts = merfish_repr.sum(axis=1)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;MERFISH RNA count for each cell. Median = 13001.0&#39;)
+</pre></div>
+</div>
+<img alt="_images/notebooks_7_2.png" src="_images/notebooks_7_2.png" />
 </div>
 </div>
-<p>There is a lot more that you can do with outputs (such as including interactive outputs)
-with your book. For more information about this, see <a class="reference external" href="https://jupyterbook.org">the Jupyter Book documentation</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>normalized_sum = int(merfish_rna_counts.median())
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.scatterplot(data=joint_data, x=&quot;Gene 1&quot;, y =&quot;Gene 8&quot;, hue=&quot;Model&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 1&#39;, ylabel=&#39;Gene 8&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_9_1.png" src="_images/notebooks_9_1.png" />
+</div>
+</div>
+<section id="normalize-counts">
+<h1>Normalize counts<a class="headerlink" href="#normalize-counts" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_repr = merfish_repr.drop(columns=[&quot;Model&quot;])
+tenx_repr = tenx_repr.drop(columns=[&quot;Model&quot;])
+
+merfish_repr = sc.AnnData(merfish_repr)
+tenx_repr = sc.AnnData(tenx_repr)
+
+sc.pp.normalize_total(merfish_repr, target_sum=normalized_sum)
+tenx_norm = tenx_repr.copy()
+sc.pp.normalize_total(tenx_norm, target_sum=normalized_sum)
+
+sc.pp.normalize_total(tenx_repr)
+tenx_raw = tenx_repr.to_df() # use later for rescaling
+sc.pp.sqrt(tenx_repr)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_99091/3313670847.py:4: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  merfish_repr = sc.AnnData(merfish_repr)
+/Users/saulvegasauceda/opt/anaconda3/envs/magic-env/lib/python3.10/site-packages/anndata/_core/anndata.py:121: ImplicitModificationWarning: Transforming to str index.
+  warnings.warn(&quot;Transforming to str index.&quot;, ImplicitModificationWarning)
+/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_99091/3313670847.py:5: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  tenx_repr = sc.AnnData(tenx_repr)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="before-running-magic">
+<h2>Before running MAGIC<a class="headerlink" href="#before-running-magic" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sce.pp.magic(tenx_repr, name_list=&#39;all_genes&#39;, solver=&#39;exact&#39;, n_jobs=-1)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/saulvegasauceda/.local/lib/python3.10/site-packages/magic/utils.py:145: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  data = anndata.AnnData(data)
+</pre></div>
+</div>
+</div>
+</div>
 </section>
+<section id="after-running-magic">
+<h2>After running MAGIC<a class="headerlink" href="#after-running-magic" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tenx_repr.X = tenx_repr.X**2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="after-squaring-vals">
+<h2>After squaring vals<a class="headerlink" href="#after-squaring-vals" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tenx_rescaled_norm = tenx_repr.copy()
+imputed_rescaled_df = tenx_rescaled_norm.to_df()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imputed_rescaled_df = rescale_data(imputed_rescaled_df, tenx_raw, 99)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7.25548531 2.98673327 2.12028012 1.97997558 1.38302608 1.18474775
+ 1.09130563 1.05188544 1.0186619 ]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imputed_rescaled_df
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Gene 1</th>
+      <th>Gene 2</th>
+      <th>Gene 3</th>
+      <th>Gene 4</th>
+      <th>Gene 5</th>
+      <th>Gene 6</th>
+      <th>Gene 7</th>
+      <th>Gene 8</th>
+      <th>Gene 9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.171116</td>
+      <td>0.771899</td>
+      <td>4.442130</td>
+      <td>17.552976</td>
+      <td>39.709695</td>
+      <td>111.047387</td>
+      <td>325.525997</td>
+      <td>934.701136</td>
+      <td>3076.085879</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.392987</td>
+      <td>0.447322</td>
+      <td>4.693307</td>
+      <td>17.839943</td>
+      <td>40.284328</td>
+      <td>107.343505</td>
+      <td>327.363512</td>
+      <td>946.066173</td>
+      <td>3065.937310</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.247011</td>
+      <td>0.470682</td>
+      <td>4.526604</td>
+      <td>19.727532</td>
+      <td>42.680727</td>
+      <td>109.183763</td>
+      <td>334.696421</td>
+      <td>944.693983</td>
+      <td>3055.915080</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.061544</td>
+      <td>1.989113</td>
+      <td>5.637200</td>
+      <td>16.624898</td>
+      <td>41.040955</td>
+      <td>102.236413</td>
+      <td>331.763271</td>
+      <td>944.698092</td>
+      <td>3066.260367</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.285596</td>
+      <td>2.265594</td>
+      <td>6.041399</td>
+      <td>15.812548</td>
+      <td>40.320203</td>
+      <td>107.234785</td>
+      <td>332.547780</td>
+      <td>954.186954</td>
+      <td>3053.091377</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>0.144593</td>
+      <td>0.320036</td>
+      <td>7.716117</td>
+      <td>15.288243</td>
+      <td>36.830627</td>
+      <td>102.497999</td>
+      <td>332.275287</td>
+      <td>951.825091</td>
+      <td>3062.424469</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>0.411992</td>
+      <td>2.025787</td>
+      <td>5.927769</td>
+      <td>16.907621</td>
+      <td>39.143932</td>
+      <td>103.355575</td>
+      <td>336.646771</td>
+      <td>950.443657</td>
+      <td>3056.646994</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>0.190416</td>
+      <td>2.104488</td>
+      <td>5.332029</td>
+      <td>16.266416</td>
+      <td>41.189493</td>
+      <td>109.481686</td>
+      <td>327.523105</td>
+      <td>943.898585</td>
+      <td>3065.348396</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>0.130051</td>
+      <td>0.242302</td>
+      <td>5.564287</td>
+      <td>16.806950</td>
+      <td>35.791358</td>
+      <td>109.574551</td>
+      <td>328.565754</td>
+      <td>948.338345</td>
+      <td>3064.225033</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>0.130397</td>
+      <td>2.212468</td>
+      <td>4.199825</td>
+      <td>17.039086</td>
+      <td>40.004915</td>
+      <td>112.668515</td>
+      <td>327.310859</td>
+      <td>933.735602</td>
+      <td>3073.638951</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 9 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imputed_rescaled = sc.AnnData(imputed_rescaled_df)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_99091/3371897545.py:1: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  imputed_rescaled = sc.AnnData(imputed_rescaled_df)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sc.pp.normalize_total(tenx_repr, target_sum=normalized_sum)
+sc.pp.normalize_total(imputed_rescaled, target_sum=normalized_sum)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imputed_df = tenx_repr.to_df()
+imputed_rescaled_df = imputed_rescaled.to_df()
+merfish_df = merfish_repr.to_df()
+tenx_norm_df = tenx_norm.to_df()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imputed_df[&quot;Model&quot;] = &quot;10x Imputed Norm&quot;
+imputed_rescaled_df[&quot;Model&quot;] = &quot;10x Imputed Rescaled&quot;
+tenx_norm_df[&quot;Model&quot;] = &quot;10x norm&quot;
+merfish_df[&quot;Model&quot;] = &quot;MERFISH norm&quot;
+synth_cells[&quot;Model&quot;] = &quot;True cells&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>after_imputation = pd.concat([imputed_rescaled_df,merfish_df, tenx_norm_df, synth_cells], ignore_index=True)
+before_imputation = pd.concat([merfish_df, tenx_norm_df, synth_cells], ignore_index=True)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.scatterplot(data=after_imputation, x=&quot;Gene 7&quot;, y =&quot;Gene 8&quot;, hue=&quot;Model&quot;, alpha=0.1, s=40)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 7&#39;, ylabel=&#39;Gene 8&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_25_1.png" src="_images/notebooks_25_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.kdeplot(data=after_imputation, x=&quot;Gene 7&quot;, y =&quot;Gene 8&quot;, hue=&quot;Model&quot;, alpha=0.3, fill=True)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 7&#39;, ylabel=&#39;Gene 8&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_26_1.png" src="_images/notebooks_26_1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="merfish-vs-10x-pre-imputation">
+<h1>MERFISH vs. 10x (pre-imputation)<a class="headerlink" href="#merfish-vs-10x-pre-imputation" title="Permalink to this headline">#</a></h1>
+</section>
+<section id="raw-counts">
+<h1>Raw counts<a class="headerlink" href="#raw-counts" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.scatterplot(data=joint_data, x=&quot;Gene 5&quot;, y =&quot;Gene 6&quot;, hue=&quot;Model&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 5&#39;, ylabel=&#39;Gene 6&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_29_1.png" src="_images/notebooks_29_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.scatterplot(data=before_imputation, x=&quot;Gene 7&quot;, y =&quot;Gene 8&quot;, hue=&quot;Model&quot;, alpha=0.4, s=40)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 7&#39;, ylabel=&#39;Gene 8&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_30_1.png" src="_images/notebooks_30_1.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
