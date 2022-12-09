@@ -7,4 +7,3 @@ matplotlib
 pandas
 anndata
 scikit-learn
-random
