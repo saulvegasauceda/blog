@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Normalize counts &#8212; blog</title>
+    <title>Evaluating MAGIC with Synthetic Dataset &#8212; blog</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -120,7 +120,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Normalize counts
+   Evaluating MAGIC with Synthetic Dataset
   </a>
  </li>
 </ul>
@@ -329,34 +329,85 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Normalize counts
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generating-synthetic-dataset">
+   1. Generating Synthetic Dataset
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#before-running-magic">
-     Before running MAGIC
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intro-to-merfish-10x-scrna-seq">
+     1.1: Intro to MERFISH &amp; 10x scRNA-seq
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#after-running-magic">
-     After running MAGIC
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-synthetic-cells-and-simulating-both-merfish-10x-scrna-seq">
+     1.2: Generating synthetic cells and simulating both MERFISH &amp; 10x scRNA-seq
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#after-squaring-vals">
-     After squaring vals
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     1.3: Data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#peeking-at-the-data">
+       Peeking at the data:
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#synthetic-data">
+         Synthetic Data:
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#merfish-data">
+         MERFISH data:
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#x-scrna-seq-data">
+         10x scRNA-seq data:
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plotting-data">
+       Plotting data:
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imputation">
+   2. Imputation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normalization">
+     2.1: Normalization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-magic">
+     2.2: Running MAGIC
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rescaling-imputed-counts">
+     2.3: Rescaling Imputed Counts
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#merfish-vs-10x-pre-imputation">
    MERFISH vs. 10x (pre-imputation)
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#raw-counts">
    Raw counts
   </a>
@@ -370,7 +421,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Normalize counts</h1>
+                <h1>Evaluating MAGIC with Synthetic Dataset</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -380,34 +431,85 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Normalize counts
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generating-synthetic-dataset">
+   1. Generating Synthetic Dataset
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#before-running-magic">
-     Before running MAGIC
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intro-to-merfish-10x-scrna-seq">
+     1.1: Intro to MERFISH &amp; 10x scRNA-seq
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#after-running-magic">
-     After running MAGIC
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-synthetic-cells-and-simulating-both-merfish-10x-scrna-seq">
+     1.2: Generating synthetic cells and simulating both MERFISH &amp; 10x scRNA-seq
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#after-squaring-vals">
-     After squaring vals
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     1.3: Data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#peeking-at-the-data">
+       Peeking at the data:
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#synthetic-data">
+         Synthetic Data:
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#merfish-data">
+         MERFISH data:
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#x-scrna-seq-data">
+         10x scRNA-seq data:
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plotting-data">
+       Plotting data:
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imputation">
+   2. Imputation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normalization">
+     2.1: Normalization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-magic">
+     2.2: Running MAGIC
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rescaling-imputed-counts">
+     2.3: Rescaling Imputed Counts
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#merfish-vs-10x-pre-imputation">
    MERFISH vs. 10x (pre-imputation)
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#raw-counts">
    Raw counts
   </a>
@@ -422,7 +524,17 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="evaluating-magic-with-synthetic-dataset">
+<h1>Evaluating MAGIC with Synthetic Dataset<a class="headerlink" href="#evaluating-magic-with-synthetic-dataset" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://github.com/KrishnaswamyLab/MAGIC">MAGIC</a> is an imputation tool developed at the <a class="reference external" href="https://www.broadinstitute.org">Broad Institute</a> for single cell RNA-sequencing (scNRA-seq) data. Imputation can potentially help improve downstream analysis in scRNA-seq data pipelines due to the potential of denoising the high dropout rates (errerroneously observed 0s) that currently obscure gene-gene relationships. Despite this promise, MAGIC has failed to receive universal support on whether it successfully recuperates lost information. This is an attempt to discover the effects of MAGIC on a synthetic dataset to determine whether it claims holds true for a simple test case.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># imports
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import magic
 import pandas as pd 
@@ -434,13 +546,15 @@ from numpy.random import seed
 from numpy.random import normal
 from random import sample
 from random import choices
+from scipy.stats import rv_discrete, rv_continuous
+from scipy.stats import nbinom
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">magic</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -487,120 +601,39 @@ from random import choices
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.stats import rv_discrete, rv_continuous
-from scipy.stats import nbinom
-
-
-# distribution plotting utilities
-def is_discrete(dist):
-
-    if hasattr(dist, &#39;dist&#39;):
-        return isinstance(dist.dist, rv_discrete)
-    else: return isinstance(dist, rv_discrete)
-
-def is_continuous(dist):
-
-    if hasattr(dist, &#39;dist&#39;):
-        return isinstance(dist.dist, rv_continuous)
-    else: return isinstance(dist, rv_continuous)
-
-def plot_distrib(distrib, title=None):
-
-    fig, ax = plt.subplots(1, 1)
-
-    if is_continuous(distrib):
-        x = np.linspace(distrib.ppf(0.001),
-                        distrib.ppf(0.999), 1000)
-        ax.plot(x, distrib.pdf(x), &#39;k-&#39;, lw=0.4)
-
-    elif is_discrete(distrib):
-        x = np.arange(distrib.ppf(0.01),
-                      distrib.ppf(0.99))
-        ax.plot(x, distrib.pmf(x), &#39;bo&#39;, ms=2, lw=0.4)
-
-    r = distrib.rvs(size=1000)
-    ax.hist(r, density=True, histtype=&#39;stepfilled&#39;, alpha=0.2, bins=200)
-
-    if title: ax.set_title(title)
-    fig_style_2(ax)
-    return ax
-
-def fig_style_2(ax):
-    for side in [&quot;right&quot;,&quot;top&quot;,&quot;left&quot;]: ax.spines[side].set_visible(False)
-    ax.get_yaxis().set_visible(False)
-
-
-
-
-Rna_species_characteristic_numbers = [1, 3, 10, 30, 100, 300, 1000, 3000, 10000]
-
-n = 100
-p = 0.5
-
-cell_generator = [nbinom(n, p) for n in Rna_species_characteristic_numbers]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Functions
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def create_synthetic_cells(rna_species_char, p, number_cells=100):
+    &#39;&#39;&#39;
+    Inputs
+    --------
+    p: the probability of a single success (parameter to scipy.stats.nbinom)
+    rna_species_char: List of size N representing the profile of N RNA species
+    number_cells: number of cells (rows) in synthetic dataset
     
-def sample_cells(cell_generator, num=100): 
-    df = pd.DataFrame([dist.rvs(num) for dist in cell_generator]).T
+    Sampling using a negative binomial distribution where n = # of median RNA
+    
+    Outputs
+    --------
+    Pandas dataframe of size (number_cells x N) where each row represents a cell
+    sampled from rna_species_char.
+    &#39;&#39;&#39;
+    cell_generator = [nbinom(n, p) for n in rna_species_char]
+    df = pd.DataFrame([dist.rvs(number_cells) for dist in cell_generator]).T
     df = df.set_axis([f&quot;Gene {g + 1}&quot; for g in range(len(df.columns))], axis=1, inplace=False)
     return df
 
-
-synth_cells = sample_cells(cell_generator)
-
-sim_capture = lambda x, p: sum(choices([0, 1], weights=[1-p, p])[0] for _ in range(x))
-
-def simulate_capture_all_cells(true_cells, capture_rate):
-    return df.applymap(lambda x: sim_capture(x, p=capture_rate))
-
-    
-for i, row in df.iterrows():
-    
-    # row is a pd.Series
-    np.random.choice(row.values, replace=False)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_repr = simulate_capture_all_cells(synth_cells, 0.9)
-tenx_repr = simulate_capture_all_cells(synth_cells, 0.3)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def generate_synthetic_cells(mean=100, std=10, num_cells=1_000, num_genes=10, gene_coefficients = [1]):
+def artificially_sample_cells(true_cells_df, capture_rate):
     &#39;&#39;&#39;
-    Generating a synthetic cell with genes expressed as a normal distribution w/ varying means
-    
-    mean = mean of norm distr
-    std = standard devation of norm distr
-    num_cells = number of cells 
-    num_genes = number of genes per cell
-    gene_coefficients = pool of gene_coefficients to resemble varying expression
+    Simulating Bernoulli sampling with synthetic dataset 
+    where p = capture_rate (p := probability RNA is included in set)
     &#39;&#39;&#39;
-    assert isinstance(gene_coefficients, list), &quot;gene_coefficients should be passed in as list&quot;
-    
-    gene_coeff = sample(gene_coeff,num_genes) # randomly samplying coefficients
-    data = {f&quot;Gene {g + 1}&quot;: normal(loc=gene_coeff[g]*mean, scale=std, size=size) 
-            for g in range(num_genes)}
-    data = pd.DataFrame(data)
-    data = data.abs() # remove any negative expression
-    return data
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def gen_synthetic_data(dataset, mean=100, std=10, size=1_000, num_genes=10):
-    data = {f&quot;Gene {g + 1}&quot;: normal(loc=gene_coeff[g]*mean, scale=std, size=size) 
-            for g in range(num_genes)}
-    data = pd.DataFrame(data)
-    data = data.abs()
-    return data
+    return true_cells_df.applymap(lambda x: sim_capture(x, p=capture_rate))
 
 def ready_for_plot():
     merfish_repr[&quot;Model&quot;] = &quot;MERFISH&quot;
@@ -608,6 +641,9 @@ def ready_for_plot():
     return pd.concat([merfish_repr, tenx_repr])
 
 def rescale_data(data, target_data, rescale):
+    &#39;&#39;&#39;
+    Function from older version of MAGIC to rescale after imputation
+    &#39;&#39;&#39;
     if rescale == 0:
         return data
     else:
@@ -623,85 +659,407 @@ def rescale_data(data, target_data, rescale):
         max_ratio = np.divide(M99, M99_new)
         data = np.multiply(data, np.tile(max_ratio,
                                       (target_data.shape[0], 1)))
-        print(max_ratio)
     return data
 </pre></div>
 </div>
 </div>
 </div>
+<section id="generating-synthetic-dataset">
+<h2>1. Generating Synthetic Dataset<a class="headerlink" href="#generating-synthetic-dataset" title="Permalink to this headline">#</a></h2>
+<section id="intro-to-merfish-10x-scrna-seq">
+<h3>1.1: Intro to MERFISH &amp; 10x scRNA-seq<a class="headerlink" href="#intro-to-merfish-10x-scrna-seq" title="Permalink to this headline">#</a></h3>
+<p>Two popular methods for measuring RNA species post-mortem are: <a class="reference external" href="https://www.science.org/doi/10.1126/science.aaa6090">MERFISH</a> &amp; <a class="reference external" href="https://www.10xgenomics.com/blog/single-cell-rna-seq-an-introductory-overview-and-tools-for-getting-started">10x scRNA-seq</a>. Both these methods are able to identify which cells within a tissue sample a given mRNA molecule comes from. Besides MERFISH being a fluorescent approach and 10x scRNA-seq utilizes sequencing, they differ in their capture rates and number of observed RNA species. MERFISH is limited by the visual spectrum, thus, can only observe an order of ~100 RNA species but with a capture rate of ~90% (fraction of RNA transcripts observerd within the ~100 RNA species). Meanwhile, 10x scRNA-seq is not bound by the observed RNA species but observe mRNA with a <a class="reference external" href="https://kb.10xgenomics.com/hc/en-us/articles/360001539051-What-fraction-of-mRNA-transcripts-are-captured-per-cell-">much lower capture rate of 30-32%</a>.</p>
+</section>
+<section id="generating-synthetic-cells-and-simulating-both-merfish-10x-scrna-seq">
+<h3>1.2: Generating synthetic cells and simulating both MERFISH &amp; 10x scRNA-seq<a class="headerlink" href="#generating-synthetic-cells-and-simulating-both-merfish-10x-scrna-seq" title="Permalink to this headline">#</a></h3>
+<p>Sampling using a negative binomial distribution for the cells we will determine as the ground truth. Then, simulating both MERFISH &amp; 10x scRNA-seq as a Bernoulli process with the capture rate serving as the probability of a success.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pool = [1/4, 1/2, 2/3, 1, 4/3, 2, 4, 10, 20]
-MEAN = 100
-STD = 10
-SIZE = 1_000
-GENES = 10
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>Rna_species_characteristic_numbers = [1, 3, 10, 30, 100, 300, 1000, 3000, 10000]
+
+synth_cells = create_synthetic_cells(Rna_species_characteristic_numbers, p=0.5)
+merfish_original_synth = artificially_sample_cells(synth_cells, 0.9)
+tenx_original_synth = artificially_sample_cells(synth_cells, 0.3)
+
+synth_cells[&quot;Model&quot;] = &quot;Ground Truth&quot;
+merfish_original_synth[&quot;Model&quot;] = &quot;MERFISH&quot;
+tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="data">
+<h3>1.3: Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h3>
+<section id="peeking-at-the-data">
+<h4>Peeking at the data:<a class="headerlink" href="#peeking-at-the-data" title="Permalink to this headline">#</a></h4>
+<section id="synthetic-data">
+<h5>Synthetic Data:<a class="headerlink" href="#synthetic-data" title="Permalink to this headline">#</a></h5>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># gene_coeff = [sample(pool,1)[0] for g in range(GENES)]
-# # pooling factors for genes
-
-# merfish_repr = gen_synthetic_data(0.9*MEAN, STD, SIZE, &quot;MERFISH&quot;, GENES)
-# tenx_repr = gen_synthetic_data(0.3*MEAN, STD, SIZE, &quot;10X synthetic&quot;, GENES)
-
-joint_data = ready_for_plot()
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_rna_counts = merfish_repr.sum(axis=1)
-ax = merfish_rna_counts.plot.hist(bins=100)
-ax.axvline(merfish_rna_counts.median(), c=&#39;r&#39;)
-ax.set_title(f&#39;MERFISH RNA count for each cell. Median = {merfish_rna_counts.median()}&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>synth_cells.head()
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_99091/705731123.py:1: FutureWarning: Dropping of nuisance columns in DataFrame reductions (with &#39;numeric_only=None&#39;) is deprecated; in a future version this will raise TypeError.  Select only valid columns before calling the reduction.
-  merfish_rna_counts = merfish_repr.sum(axis=1)
-</pre></div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Gene 1</th>
+      <th>Gene 2</th>
+      <th>Gene 3</th>
+      <th>Gene 4</th>
+      <th>Gene 5</th>
+      <th>Gene 6</th>
+      <th>Gene 7</th>
+      <th>Gene 8</th>
+      <th>Gene 9</th>
+      <th>Model</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>4</td>
+      <td>8</td>
+      <td>35</td>
+      <td>130</td>
+      <td>329</td>
+      <td>1088</td>
+      <td>2990</td>
+      <td>10203</td>
+      <td>Ground Truth</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>1</td>
+      <td>14</td>
+      <td>36</td>
+      <td>83</td>
+      <td>323</td>
+      <td>1046</td>
+      <td>3180</td>
+      <td>9975</td>
+      <td>Ground Truth</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>4</td>
+      <td>20</td>
+      <td>28</td>
+      <td>78</td>
+      <td>204</td>
+      <td>972</td>
+      <td>2977</td>
+      <td>10242</td>
+      <td>Ground Truth</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>5</td>
+      <td>6</td>
+      <td>39</td>
+      <td>119</td>
+      <td>330</td>
+      <td>934</td>
+      <td>2950</td>
+      <td>9996</td>
+      <td>Ground Truth</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>5</td>
+      <td>7</td>
+      <td>38</td>
+      <td>92</td>
+      <td>296</td>
+      <td>952</td>
+      <td>2970</td>
+      <td>10206</td>
+      <td>Ground Truth</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;MERFISH RNA count for each cell. Median = 13001.0&#39;)
-</pre></div>
-</div>
-<img alt="_images/notebooks_7_2.png" src="_images/notebooks_7_2.png" />
-</div>
-</div>
+</section>
+<section id="merfish-data">
+<h5>MERFISH data:<a class="headerlink" href="#merfish-data" title="Permalink to this headline">#</a></h5>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>normalized_sum = int(merfish_rna_counts.median())
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.scatterplot(data=joint_data, x=&quot;Gene 1&quot;, y =&quot;Gene 8&quot;, hue=&quot;Model&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_original_synth.head(5)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 1&#39;, ylabel=&#39;Gene 8&#39;&gt;
-</pre></div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Gene 1</th>
+      <th>Gene 2</th>
+      <th>Gene 3</th>
+      <th>Gene 4</th>
+      <th>Gene 5</th>
+      <th>Gene 6</th>
+      <th>Gene 7</th>
+      <th>Gene 8</th>
+      <th>Gene 9</th>
+      <th>Model</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>4</td>
+      <td>8</td>
+      <td>32</td>
+      <td>117</td>
+      <td>297</td>
+      <td>975</td>
+      <td>2690</td>
+      <td>9220</td>
+      <td>MERFISH</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>1</td>
+      <td>11</td>
+      <td>34</td>
+      <td>68</td>
+      <td>290</td>
+      <td>939</td>
+      <td>2866</td>
+      <td>8993</td>
+      <td>MERFISH</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>4</td>
+      <td>18</td>
+      <td>27</td>
+      <td>67</td>
+      <td>188</td>
+      <td>864</td>
+      <td>2688</td>
+      <td>9205</td>
+      <td>MERFISH</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>5</td>
+      <td>6</td>
+      <td>34</td>
+      <td>108</td>
+      <td>297</td>
+      <td>838</td>
+      <td>2671</td>
+      <td>8975</td>
+      <td>MERFISH</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>4</td>
+      <td>7</td>
+      <td>33</td>
+      <td>84</td>
+      <td>261</td>
+      <td>855</td>
+      <td>2655</td>
+      <td>9162</td>
+      <td>MERFISH</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
-<img alt="_images/notebooks_9_1.png" src="_images/notebooks_9_1.png" />
-</div>
-</div>
-<section id="normalize-counts">
-<h1>Normalize counts<a class="headerlink" href="#normalize-counts" title="Permalink to this headline">#</a></h1>
+</section>
+<section id="x-scrna-seq-data">
+<h5>10x scRNA-seq data:<a class="headerlink" href="#x-scrna-seq-data" title="Permalink to this headline">#</a></h5>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_repr = merfish_repr.drop(columns=[&quot;Model&quot;])
-tenx_repr = tenx_repr.drop(columns=[&quot;Model&quot;])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tenx_original_synth.head(5)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-merfish_repr = sc.AnnData(merfish_repr)
-tenx_repr = sc.AnnData(tenx_repr)
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Gene 1</th>
+      <th>Gene 2</th>
+      <th>Gene 3</th>
+      <th>Gene 4</th>
+      <th>Gene 5</th>
+      <th>Gene 6</th>
+      <th>Gene 7</th>
+      <th>Gene 8</th>
+      <th>Gene 9</th>
+      <th>Model</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>10</td>
+      <td>33</td>
+      <td>99</td>
+      <td>348</td>
+      <td>887</td>
+      <td>3021</td>
+      <td>10x scRNA-seq</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>12</td>
+      <td>31</td>
+      <td>97</td>
+      <td>316</td>
+      <td>983</td>
+      <td>3053</td>
+      <td>10x scRNA-seq</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>1</td>
+      <td>6</td>
+      <td>5</td>
+      <td>27</td>
+      <td>66</td>
+      <td>298</td>
+      <td>901</td>
+      <td>3086</td>
+      <td>10x scRNA-seq</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>16</td>
+      <td>35</td>
+      <td>103</td>
+      <td>290</td>
+      <td>903</td>
+      <td>3030</td>
+      <td>10x scRNA-seq</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>17</td>
+      <td>28</td>
+      <td>83</td>
+      <td>289</td>
+      <td>911</td>
+      <td>3047</td>
+      <td>10x scRNA-seq</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="plotting-data">
+<h4>Plotting data:<a class="headerlink" href="#plotting-data" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>before_imputation = pd.concat([synth_cells, merfish_original_synth, tenx_original_synth], ignore_index=True)
+sns.kdeplot(data=before_imputation, x=&quot;Gene 1&quot;, y =&quot;Gene 2&quot;, hue=&quot;Model&quot;, alpha=0.2, fill=True)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 1&#39;, ylabel=&#39;Gene 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_18_1.png" src="_images/notebooks_18_1.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="imputation">
+<h2>2. Imputation<a class="headerlink" href="#imputation" title="Permalink to this headline">#</a></h2>
+<section id="normalization">
+<h3>2.1: Normalization<a class="headerlink" href="#normalization" title="Permalink to this headline">#</a></h3>
+<p>Normalizing the RNA counts as a processing step for MAGIC. Using the MERFISH as basis for normalized sum to compare downstream. Before MAGIC, the 10x scRNA-seq data is normalized by the median RNA count of the dataset, then the values are square rooted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_original_synth = merfish_original_synth.drop(columns=[&quot;Model&quot;])
+tenx_original_synth = tenx_original_synth.drop(columns=[&quot;Model&quot;])
+
+# obtaining target sum for normalization
+merfish_rna_counts = merfish_original_synth.sum(axis=1)
+normalized_sum = int(merfish_rna_counts.median())
+
+# Normalizing dataset
+merfish_repr = sc.AnnData(merfish_original_synth)
+tenx_repr = sc.AnnData(tenx_original_synth)
 
 sc.pp.normalize_total(merfish_repr, target_sum=normalized_sum)
 tenx_norm = tenx_repr.copy()
@@ -714,21 +1072,24 @@ sc.pp.sqrt(tenx_repr)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_99091/3313670847.py:4: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  merfish_repr = sc.AnnData(merfish_repr)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_42229/3528827175.py:9: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  merfish_repr = sc.AnnData(merfish_original_synth)
 /Users/saulvegasauceda/opt/anaconda3/envs/magic-env/lib/python3.10/site-packages/anndata/_core/anndata.py:121: ImplicitModificationWarning: Transforming to str index.
   warnings.warn(&quot;Transforming to str index.&quot;, ImplicitModificationWarning)
-/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_99091/3313670847.py:5: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  tenx_repr = sc.AnnData(tenx_repr)
+/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_42229/3528827175.py:10: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  tenx_repr = sc.AnnData(tenx_original_synth)
 </pre></div>
 </div>
 </div>
 </div>
-<section id="before-running-magic">
-<h2>Before running MAGIC<a class="headerlink" href="#before-running-magic" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="running-magic">
+<h3>2.2: Running MAGIC<a class="headerlink" href="#running-magic" title="Permalink to this headline">#</a></h3>
+<p>Running MAGIC with default parameters and normalizing the imputed counts back to the basis of the MERFISH median by squaring and normalizing sum.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sce.pp.magic(tenx_repr, name_list=&#39;all_genes&#39;, solver=&#39;exact&#39;, n_jobs=-1)
+tenx_repr.X = tenx_repr.X**2
 </pre></div>
 </div>
 </div>
@@ -740,35 +1101,21 @@ sc.pp.sqrt(tenx_repr)
 </div>
 </div>
 </section>
-<section id="after-running-magic">
-<h2>After running MAGIC<a class="headerlink" href="#after-running-magic" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tenx_repr.X = tenx_repr.X**2
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="after-squaring-vals">
-<h2>After squaring vals<a class="headerlink" href="#after-squaring-vals" title="Permalink to this headline">#</a></h2>
+<section id="rescaling-imputed-counts">
+<h3>2.3: Rescaling Imputed Counts<a class="headerlink" href="#rescaling-imputed-counts" title="Permalink to this headline">#</a></h3>
+<p>Duplicating the results of MAGIC to determine whether rescaling after imputation is still necessary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tenx_rescaled_norm = tenx_repr.copy()
 imputed_rescaled_df = tenx_rescaled_norm.to_df()
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imputed_rescaled_df = rescale_data(imputed_rescaled_df, tenx_raw, 99)
+imputed_rescaled_df = rescale_data(imputed_rescaled_df, tenx_raw, 99)
+imputed_rescaled = sc.AnnData(imputed_rescaled_df)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7.25548531 2.98673327 2.12028012 1.97997558 1.38302608 1.18474775
- 1.09130563 1.05188544 1.0186619 ]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_42229/2028333819.py:4: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  imputed_rescaled = sc.AnnData(imputed_rescaled_df)
 </pre></div>
 </div>
 </div>
@@ -812,63 +1159,63 @@ imputed_rescaled_df = tenx_rescaled_norm.to_df()
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.171116</td>
-      <td>0.771899</td>
-      <td>4.442130</td>
-      <td>17.552976</td>
-      <td>39.709695</td>
-      <td>111.047387</td>
-      <td>325.525997</td>
-      <td>934.701136</td>
-      <td>3076.085879</td>
+      <td>0.109854</td>
+      <td>2.720782</td>
+      <td>3.535385</td>
+      <td>12.874616</td>
+      <td>45.551599</td>
+      <td>110.030586</td>
+      <td>340.665033</td>
+      <td>955.981629</td>
+      <td>3053.801167</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.392987</td>
-      <td>0.447322</td>
-      <td>4.693307</td>
-      <td>17.839943</td>
-      <td>40.284328</td>
-      <td>107.343505</td>
-      <td>327.363512</td>
-      <td>946.066173</td>
-      <td>3065.937310</td>
+      <td>0.199255</td>
+      <td>0.210340</td>
+      <td>5.172939</td>
+      <td>15.272042</td>
+      <td>45.068107</td>
+      <td>110.081070</td>
+      <td>329.065819</td>
+      <td>972.461709</td>
+      <td>3047.863438</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2.247011</td>
-      <td>0.470682</td>
-      <td>4.526604</td>
-      <td>19.727532</td>
-      <td>42.680727</td>
-      <td>109.183763</td>
-      <td>334.696421</td>
-      <td>944.693983</td>
-      <td>3055.915080</td>
+      <td>0.255513</td>
+      <td>1.376472</td>
+      <td>7.025949</td>
+      <td>11.961586</td>
+      <td>42.637731</td>
+      <td>100.624614</td>
+      <td>326.284412</td>
+      <td>952.080428</td>
+      <td>3080.485325</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>3.061544</td>
-      <td>1.989113</td>
-      <td>5.637200</td>
-      <td>16.624898</td>
-      <td>41.040955</td>
-      <td>102.236413</td>
-      <td>331.763271</td>
-      <td>944.698092</td>
-      <td>3066.260367</td>
+      <td>0.178783</td>
+      <td>2.329816</td>
+      <td>4.375157</td>
+      <td>16.595897</td>
+      <td>45.094219</td>
+      <td>111.648490</td>
+      <td>327.776019</td>
+      <td>957.535278</td>
+      <td>3060.468843</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.285596</td>
-      <td>2.265594</td>
-      <td>6.041399</td>
-      <td>15.812548</td>
-      <td>40.320203</td>
-      <td>107.234785</td>
-      <td>332.547780</td>
-      <td>954.186954</td>
-      <td>3053.091377</td>
+      <td>0.236692</td>
+      <td>1.657093</td>
+      <td>6.129715</td>
+      <td>16.936223</td>
+      <td>42.938766</td>
+      <td>106.633653</td>
+      <td>326.079823</td>
+      <td>957.484624</td>
+      <td>3067.269305</td>
     </tr>
     <tr>
       <th>...</th>
@@ -884,63 +1231,63 @@ imputed_rescaled_df = tenx_rescaled_norm.to_df()
     </tr>
     <tr>
       <th>95</th>
-      <td>0.144593</td>
-      <td>0.320036</td>
-      <td>7.716117</td>
-      <td>15.288243</td>
-      <td>36.830627</td>
-      <td>102.497999</td>
-      <td>332.275287</td>
-      <td>951.825091</td>
-      <td>3062.424469</td>
+      <td>0.628925</td>
+      <td>1.511681</td>
+      <td>6.948460</td>
+      <td>13.172124</td>
+      <td>42.288423</td>
+      <td>107.209117</td>
+      <td>321.793303</td>
+      <td>967.394947</td>
+      <td>3063.695556</td>
     </tr>
     <tr>
       <th>96</th>
-      <td>0.411992</td>
-      <td>2.025787</td>
-      <td>5.927769</td>
-      <td>16.907621</td>
-      <td>39.143932</td>
-      <td>103.355575</td>
-      <td>336.646771</td>
-      <td>950.443657</td>
-      <td>3056.646994</td>
+      <td>0.093657</td>
+      <td>2.964367</td>
+      <td>3.237465</td>
+      <td>10.358930</td>
+      <td>45.762912</td>
+      <td>109.267326</td>
+      <td>343.573150</td>
+      <td>959.594298</td>
+      <td>3050.002704</td>
     </tr>
     <tr>
       <th>97</th>
-      <td>0.190416</td>
-      <td>2.104488</td>
-      <td>5.332029</td>
-      <td>16.266416</td>
-      <td>41.189493</td>
-      <td>109.481686</td>
-      <td>327.523105</td>
-      <td>943.898585</td>
-      <td>3065.348396</td>
+      <td>0.513840</td>
+      <td>0.281643</td>
+      <td>6.394966</td>
+      <td>13.333370</td>
+      <td>43.831143</td>
+      <td>108.073335</td>
+      <td>333.669589</td>
+      <td>964.514878</td>
+      <td>3054.382633</td>
     </tr>
     <tr>
       <th>98</th>
-      <td>0.130051</td>
-      <td>0.242302</td>
-      <td>5.564287</td>
-      <td>16.806950</td>
-      <td>35.791358</td>
-      <td>109.574551</td>
-      <td>328.565754</td>
-      <td>948.338345</td>
-      <td>3064.225033</td>
+      <td>0.209917</td>
+      <td>1.271766</td>
+      <td>6.991731</td>
+      <td>13.529227</td>
+      <td>43.115481</td>
+      <td>104.241988</td>
+      <td>326.699154</td>
+      <td>944.033134</td>
+      <td>3083.473123</td>
     </tr>
     <tr>
       <th>99</th>
-      <td>0.130397</td>
-      <td>2.212468</td>
-      <td>4.199825</td>
-      <td>17.039086</td>
-      <td>40.004915</td>
-      <td>112.668515</td>
-      <td>327.310859</td>
-      <td>933.735602</td>
-      <td>3073.638951</td>
+      <td>0.164175</td>
+      <td>0.485211</td>
+      <td>6.179781</td>
+      <td>14.778864</td>
+      <td>44.013765</td>
+      <td>105.355929</td>
+      <td>324.932512</td>
+      <td>958.082341</td>
+      <td>3069.922275</td>
     </tr>
   </tbody>
 </table>
@@ -949,50 +1296,21 @@ imputed_rescaled_df = tenx_rescaled_norm.to_df()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imputed_rescaled = sc.AnnData(imputed_rescaled_df)
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_99091/3371897545.py:1: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  imputed_rescaled = sc.AnnData(imputed_rescaled_df)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sc.pp.normalize_total(tenx_repr, target_sum=normalized_sum)
 sc.pp.normalize_total(imputed_rescaled, target_sum=normalized_sum)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imputed_df = tenx_repr.to_df()
+
+imputed_df = tenx_repr.to_df()
 imputed_rescaled_df = imputed_rescaled.to_df()
 merfish_df = merfish_repr.to_df()
 tenx_norm_df = tenx_norm.to_df()
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imputed_df[&quot;Model&quot;] = &quot;10x Imputed Norm&quot;
+
+imputed_df[&quot;Model&quot;] = &quot;10x scRNA-seq Imputed&quot;
 imputed_rescaled_df[&quot;Model&quot;] = &quot;10x Imputed Rescaled&quot;
-tenx_norm_df[&quot;Model&quot;] = &quot;10x norm&quot;
-merfish_df[&quot;Model&quot;] = &quot;MERFISH norm&quot;
+tenx_norm_df[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
+merfish_df[&quot;Model&quot;] = &quot;MERFISH Normalized&quot;
 synth_cells[&quot;Model&quot;] = &quot;True cells&quot;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>after_imputation = pd.concat([imputed_rescaled_df,merfish_df, tenx_norm_df, synth_cells], ignore_index=True)
-before_imputation = pd.concat([merfish_df, tenx_norm_df, synth_cells], ignore_index=True)
+
+after_imputation = pd.concat([imputed_rescaled_df,merfish_df, tenx_norm_df, synth_cells], ignore_index=True)
 </pre></div>
 </div>
 </div>
@@ -1007,7 +1325,7 @@ before_imputation = pd.concat([merfish_df, tenx_norm_df, synth_cells], ignore_in
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 7&#39;, ylabel=&#39;Gene 8&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_25_1.png" src="_images/notebooks_25_1.png" />
+<img alt="_images/notebooks_28_1.png" src="_images/notebooks_28_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1020,16 +1338,16 @@ before_imputation = pd.concat([merfish_df, tenx_norm_df, synth_cells], ignore_in
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 7&#39;, ylabel=&#39;Gene 8&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_26_1.png" src="_images/notebooks_26_1.png" />
+<img alt="_images/notebooks_29_1.png" src="_images/notebooks_29_1.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="merfish-vs-10x-pre-imputation">
-<h1>MERFISH vs. 10x (pre-imputation)<a class="headerlink" href="#merfish-vs-10x-pre-imputation" title="Permalink to this headline">#</a></h1>
+<h2>MERFISH vs. 10x (pre-imputation)<a class="headerlink" href="#merfish-vs-10x-pre-imputation" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="raw-counts">
-<h1>Raw counts<a class="headerlink" href="#raw-counts" title="Permalink to this headline">#</a></h1>
+<h2>Raw counts<a class="headerlink" href="#raw-counts" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.scatterplot(data=joint_data, x=&quot;Gene 5&quot;, y =&quot;Gene 6&quot;, hue=&quot;Model&quot;)
@@ -1040,7 +1358,7 @@ before_imputation = pd.concat([merfish_df, tenx_norm_df, synth_cells], ignore_in
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 5&#39;, ylabel=&#39;Gene 6&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_29_1.png" src="_images/notebooks_29_1.png" />
+<img alt="_images/notebooks_32_1.png" src="_images/notebooks_32_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1053,9 +1371,10 @@ before_imputation = pd.concat([merfish_df, tenx_norm_df, synth_cells], ignore_in
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 7&#39;, ylabel=&#39;Gene 8&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_30_1.png" src="_images/notebooks_30_1.png" />
+<img alt="_images/notebooks_33_1.png" src="_images/notebooks_33_1.png" />
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

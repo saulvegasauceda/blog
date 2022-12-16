@@ -27,11 +27,13 @@ from numpy.random import seed
 from numpy.random import normal
 from random import sample
 from random import choices
+from scipy.stats import rv_discrete, rv_continuous
+from scipy.stats import nbinom
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mImportError[0m                               Traceback (most recent call last)
-Cell [0;32mIn[1], line 1[0m
+Cell [0;32mIn[2], line 1[0m
 [0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mmagic[39;00m
 [1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m 
 [1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mseaborn[39;00m [38;5;28;01mas[39;00m [38;5;21;01msns[39;00m
