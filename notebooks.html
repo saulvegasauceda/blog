@@ -403,13 +403,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#merfish-vs-10x-pre-imputation">
-   MERFISH vs. 10x (pre-imputation)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#raw-counts">
-   Raw counts
+  <a class="reference internal nav-link" href="#results-after-imputation">
+   2. Results after Imputation
   </a>
  </li>
 </ul>
@@ -505,13 +500,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#merfish-vs-10x-pre-imputation">
-   MERFISH vs. 10x (pre-imputation)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#raw-counts">
-   Raw counts
+  <a class="reference internal nav-link" href="#results-after-imputation">
+   2. Results after Imputation
   </a>
  </li>
 </ul>
@@ -526,21 +516,16 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="evaluating-magic-with-synthetic-dataset">
 <h1>Evaluating MAGIC with Synthetic Dataset<a class="headerlink" href="#evaluating-magic-with-synthetic-dataset" title="Permalink to this headline">#</a></h1>
-<p><a class="reference external" href="https://github.com/KrishnaswamyLab/MAGIC">MAGIC</a> is an imputation tool developed at the <a class="reference external" href="https://www.broadinstitute.org">Broad Institute</a> for single cell RNA-sequencing (scNRA-seq) data. Imputation can potentially help improve downstream analysis in scRNA-seq data pipelines due to the potential of denoising the high dropout rates (errerroneously observed 0s) that currently obscure gene-gene relationships. Despite this promise, MAGIC has failed to receive universal support on whether it successfully recuperates lost information. This is an attempt to discover the effects of MAGIC on a synthetic dataset to determine whether it claims holds true for a simple test case.</p>
+<p><a class="reference external" href="https://github.com/KrishnaswamyLab/MAGIC">MAGIC</a> is an imputation tool developed at the <a class="reference external" href="https://www.broadinstitute.org">Broad Institute</a> for single cell RNA-sequencing (scNRA-seq) data. Imputation can potentially help improve downstream analysis in scRNA-seq data pipelines due to the potential of denoising the high dropout rates (errerroneously observed 0s) that currently obscure gene-gene relationships. Despite this promise, MAGIC has failed to receive universal support on whether it successfully recuperates lost information. This is an attempt to discover the effects of MAGIC on a synthetic dataset to determine whether its claims holds true for a simple test case.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># imports
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import magic
+import magic
 import pandas as pd 
 import seaborn as sns
 import scanpy as sc
 import numpy as np
+import matplotlib.pyplot as plt
 import scanpy.external as sce
 from numpy.random import seed
 from numpy.random import normal
@@ -554,10 +539,11 @@ from scipy.stats import nbinom
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">magic</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># imports</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">magic</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
 <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.15</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">magic</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">.magic</span> <span class="kn">import</span> <span class="n">MAGIC</span>
@@ -602,13 +588,8 @@ from scipy.stats import nbinom
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Functions
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def create_synthetic_cells(rna_species_char, p, number_cells=100):
+seed(1738)
+def create_synthetic_cells(rna_species_char, p, number_cells=100):
     &#39;&#39;&#39;
     Inputs
     --------
@@ -627,6 +608,8 @@ from scipy.stats import nbinom
     df = pd.DataFrame([dist.rvs(number_cells) for dist in cell_generator]).T
     df = df.set_axis([f&quot;Gene {g + 1}&quot; for g in range(len(df.columns))], axis=1, inplace=False)
     return df
+
+sim_capture = lambda x, p: sum(choices([0, 1], weights=[1-p, p])[0] for _ in range(x))
 
 def artificially_sample_cells(true_cells_df, capture_rate):
     &#39;&#39;&#39;
@@ -735,67 +718,67 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
   <tbody>
     <tr>
       <th>0</th>
-      <td>0</td>
-      <td>4</td>
+      <td>1</td>
+      <td>3</td>
       <td>8</td>
-      <td>35</td>
-      <td>130</td>
-      <td>329</td>
-      <td>1088</td>
-      <td>2990</td>
-      <td>10203</td>
+      <td>30</td>
+      <td>121</td>
+      <td>295</td>
+      <td>940</td>
+      <td>2987</td>
+      <td>10138</td>
       <td>Ground Truth</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>2</td>
       <td>3</td>
-      <td>1</td>
-      <td>14</td>
-      <td>36</td>
-      <td>83</td>
-      <td>323</td>
-      <td>1046</td>
-      <td>3180</td>
-      <td>9975</td>
+      <td>5</td>
+      <td>21</td>
+      <td>116</td>
+      <td>296</td>
+      <td>1002</td>
+      <td>2970</td>
+      <td>10366</td>
       <td>Ground Truth</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>20</td>
-      <td>28</td>
-      <td>78</td>
-      <td>204</td>
-      <td>972</td>
-      <td>2977</td>
-      <td>10242</td>
+      <td>8</td>
+      <td>1</td>
+      <td>17</td>
+      <td>18</td>
+      <td>133</td>
+      <td>320</td>
+      <td>1031</td>
+      <td>3073</td>
+      <td>9983</td>
       <td>Ground Truth</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0</td>
-      <td>5</td>
-      <td>6</td>
-      <td>39</td>
-      <td>119</td>
-      <td>330</td>
-      <td>934</td>
-      <td>2950</td>
-      <td>9996</td>
+      <td>2</td>
+      <td>8</td>
+      <td>29</td>
+      <td>118</td>
+      <td>320</td>
+      <td>983</td>
+      <td>2861</td>
+      <td>9927</td>
       <td>Ground Truth</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0</td>
-      <td>5</td>
       <td>7</td>
-      <td>38</td>
-      <td>92</td>
-      <td>296</td>
-      <td>952</td>
-      <td>2970</td>
-      <td>10206</td>
+      <td>2</td>
+      <td>8</td>
+      <td>30</td>
+      <td>85</td>
+      <td>290</td>
+      <td>1056</td>
+      <td>2982</td>
+      <td>9959</td>
       <td>Ground Truth</td>
     </tr>
   </tbody>
@@ -845,67 +828,67 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
   <tbody>
     <tr>
       <th>0</th>
-      <td>0</td>
-      <td>4</td>
-      <td>8</td>
-      <td>32</td>
-      <td>117</td>
-      <td>297</td>
-      <td>975</td>
-      <td>2690</td>
-      <td>9220</td>
+      <td>1</td>
+      <td>3</td>
+      <td>6</td>
+      <td>30</td>
+      <td>110</td>
+      <td>258</td>
+      <td>857</td>
+      <td>2670</td>
+      <td>9093</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>3</td>
-      <td>1</td>
-      <td>11</td>
-      <td>34</td>
-      <td>68</td>
-      <td>290</td>
-      <td>939</td>
-      <td>2866</td>
-      <td>8993</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>20</td>
+      <td>110</td>
+      <td>270</td>
+      <td>923</td>
+      <td>2690</td>
+      <td>9340</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
-      <td>4</td>
-      <td>18</td>
-      <td>27</td>
-      <td>67</td>
-      <td>188</td>
-      <td>864</td>
-      <td>2688</td>
-      <td>9205</td>
+      <td>7</td>
+      <td>0</td>
+      <td>16</td>
+      <td>15</td>
+      <td>121</td>
+      <td>289</td>
+      <td>947</td>
+      <td>2783</td>
+      <td>8975</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0</td>
-      <td>5</td>
+      <td>2</td>
       <td>6</td>
-      <td>34</td>
-      <td>108</td>
-      <td>297</td>
-      <td>838</td>
-      <td>2671</td>
-      <td>8975</td>
+      <td>28</td>
+      <td>109</td>
+      <td>298</td>
+      <td>868</td>
+      <td>2580</td>
+      <td>8932</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0</td>
-      <td>4</td>
       <td>7</td>
-      <td>33</td>
-      <td>84</td>
-      <td>261</td>
-      <td>855</td>
-      <td>2655</td>
-      <td>9162</td>
+      <td>2</td>
+      <td>8</td>
+      <td>28</td>
+      <td>80</td>
+      <td>260</td>
+      <td>935</td>
+      <td>2654</td>
+      <td>9014</td>
       <td>MERFISH</td>
     </tr>
   </tbody>
@@ -955,67 +938,67 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
   <tbody>
     <tr>
       <th>0</th>
-      <td>0</td>
-      <td>2</td>
       <td>1</td>
-      <td>10</td>
-      <td>33</td>
-      <td>99</td>
-      <td>348</td>
-      <td>887</td>
-      <td>3021</td>
+      <td>0</td>
+      <td>3</td>
+      <td>12</td>
+      <td>34</td>
+      <td>90</td>
+      <td>297</td>
+      <td>856</td>
+      <td>3075</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>12</td>
-      <td>31</td>
-      <td>97</td>
-      <td>316</td>
-      <td>983</td>
-      <td>3053</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>11</td>
+      <td>34</td>
+      <td>100</td>
+      <td>308</td>
+      <td>926</td>
+      <td>3022</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>3</td>
       <td>0</td>
-      <td>1</td>
       <td>6</td>
-      <td>5</td>
-      <td>27</td>
-      <td>66</td>
-      <td>298</td>
-      <td>901</td>
-      <td>3086</td>
+      <td>7</td>
+      <td>43</td>
+      <td>106</td>
+      <td>296</td>
+      <td>956</td>
+      <td>2979</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0</td>
-      <td>2</td>
       <td>1</td>
-      <td>16</td>
-      <td>35</td>
-      <td>103</td>
-      <td>290</td>
-      <td>903</td>
-      <td>3030</td>
+      <td>3</td>
+      <td>9</td>
+      <td>32</td>
+      <td>96</td>
+      <td>282</td>
+      <td>831</td>
+      <td>2953</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0</td>
+      <td>3</td>
       <td>1</td>
       <td>3</td>
-      <td>17</td>
-      <td>28</td>
-      <td>83</td>
-      <td>289</td>
-      <td>911</td>
-      <td>3047</td>
+      <td>8</td>
+      <td>26</td>
+      <td>84</td>
+      <td>311</td>
+      <td>875</td>
+      <td>2927</td>
       <td>10x scRNA-seq</td>
     </tr>
   </tbody>
@@ -1029,17 +1012,23 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>before_imputation = pd.concat([synth_cells, merfish_original_synth, tenx_original_synth], ignore_index=True)
-sns.kdeplot(data=before_imputation, x=&quot;Gene 1&quot;, y =&quot;Gene 2&quot;, hue=&quot;Model&quot;, alpha=0.2, fill=True)
+genes = before_imputation.columns[:-1]
+
+for i in range(5): 
+    plt.figure() #this creates a new figure on which your plot will appear
+    sns.kdeplot(data=before_imputation, x=genes[i], y =genes[i+1], hue=&quot;Model&quot;, alpha=0.2, fill=True)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 1&#39;, ylabel=&#39;Gene 2&#39;&gt;
-</pre></div>
+<img alt="_images/notebooks_16_0.png" src="_images/notebooks_16_0.png" />
+<img alt="_images/notebooks_16_1.png" src="_images/notebooks_16_1.png" />
+<img alt="_images/notebooks_16_2.png" src="_images/notebooks_16_2.png" />
+<img alt="_images/notebooks_16_3.png" src="_images/notebooks_16_3.png" />
+<img alt="_images/notebooks_16_4.png" src="_images/notebooks_16_4.png" />
 </div>
-<img alt="_images/notebooks_18_1.png" src="_images/notebooks_18_1.png" />
 </div>
-</div>
+<p>From the plots, we can see that the MERFISH distributions more closely resemble that of the Ground Truth dataset. Thus, our goal with imputation is to transform the 10x scRNA-seq data to become more similar to the MERFISH data.</p>
 </section>
 </section>
 </section>
@@ -1050,7 +1039,8 @@ sns.kdeplot(data=before_imputation, x=&quot;Gene 1&quot;, y =&quot;Gene 2&quot;,
 <p>Normalizing the RNA counts as a processing step for MAGIC. Using the MERFISH as basis for normalized sum to compare downstream. Before MAGIC, the 10x scRNA-seq data is normalized by the median RNA count of the dataset, then the values are square rooted.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_original_synth = merfish_original_synth.drop(columns=[&quot;Model&quot;])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+merfish_original_synth = merfish_original_synth.drop(columns=[&quot;Model&quot;])
 tenx_original_synth = tenx_original_synth.drop(columns=[&quot;Model&quot;])
 
 # obtaining target sum for normalization
@@ -1065,19 +1055,10 @@ sc.pp.normalize_total(merfish_repr, target_sum=normalized_sum)
 tenx_norm = tenx_repr.copy()
 sc.pp.normalize_total(tenx_norm, target_sum=normalized_sum)
 
+# Pre-processing step for MAGIC
 sc.pp.normalize_total(tenx_repr)
 tenx_raw = tenx_repr.to_df() # use later for rescaling
 sc.pp.sqrt(tenx_repr)
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_42229/3528827175.py:9: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  merfish_repr = sc.AnnData(merfish_original_synth)
-/Users/saulvegasauceda/opt/anaconda3/envs/magic-env/lib/python3.10/site-packages/anndata/_core/anndata.py:121: ImplicitModificationWarning: Transforming to str index.
-  warnings.warn(&quot;Transforming to str index.&quot;, ImplicitModificationWarning)
-/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_42229/3528827175.py:10: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  tenx_repr = sc.AnnData(tenx_original_synth)
 </pre></div>
 </div>
 </div>
@@ -1088,14 +1069,9 @@ sc.pp.sqrt(tenx_repr)
 <p>Running MAGIC with default parameters and normalizing the imputed counts back to the basis of the MERFISH median by squaring and normalizing sum.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sce.pp.magic(tenx_repr, name_list=&#39;all_genes&#39;, solver=&#39;exact&#39;, n_jobs=-1)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+sce.pp.magic(tenx_repr, name_list=&#39;all_genes&#39;, solver=&#39;exact&#39;, n_jobs=-1)
 tenx_repr.X = tenx_repr.X**2
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/saulvegasauceda/.local/lib/python3.10/site-packages/magic/utils.py:145: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  data = anndata.AnnData(data)
 </pre></div>
 </div>
 </div>
@@ -1103,197 +1079,19 @@ tenx_repr.X = tenx_repr.X**2
 </section>
 <section id="rescaling-imputed-counts">
 <h3>2.3: Rescaling Imputed Counts<a class="headerlink" href="#rescaling-imputed-counts" title="Permalink to this headline">#</a></h3>
-<p>Duplicating the results of MAGIC to determine whether rescaling after imputation is still necessary.</p>
+<p>Duplicating the results of MAGIC to determine whether rescaling after imputation is still necessary. Using a vestigial function <code class="docutils literal notranslate"><span class="pre">rescale_data()</span></code> from the <a class="reference external" href="https://github.com/KrishnaswamyLab">Krishnaswamy Lab</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tenx_rescaled_norm = tenx_repr.copy()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+tenx_rescaled_norm = tenx_repr.copy()
 imputed_rescaled_df = tenx_rescaled_norm.to_df()
 imputed_rescaled_df = rescale_data(imputed_rescaled_df, tenx_raw, 99)
 imputed_rescaled = sc.AnnData(imputed_rescaled_df)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/w5/qsmlzn8n4b9dzq_r63twss1h0000gn/T/ipykernel_42229/2028333819.py:4: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  imputed_rescaled = sc.AnnData(imputed_rescaled_df)
-</pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imputed_rescaled_df
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Gene 1</th>
-      <th>Gene 2</th>
-      <th>Gene 3</th>
-      <th>Gene 4</th>
-      <th>Gene 5</th>
-      <th>Gene 6</th>
-      <th>Gene 7</th>
-      <th>Gene 8</th>
-      <th>Gene 9</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.109854</td>
-      <td>2.720782</td>
-      <td>3.535385</td>
-      <td>12.874616</td>
-      <td>45.551599</td>
-      <td>110.030586</td>
-      <td>340.665033</td>
-      <td>955.981629</td>
-      <td>3053.801167</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.199255</td>
-      <td>0.210340</td>
-      <td>5.172939</td>
-      <td>15.272042</td>
-      <td>45.068107</td>
-      <td>110.081070</td>
-      <td>329.065819</td>
-      <td>972.461709</td>
-      <td>3047.863438</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.255513</td>
-      <td>1.376472</td>
-      <td>7.025949</td>
-      <td>11.961586</td>
-      <td>42.637731</td>
-      <td>100.624614</td>
-      <td>326.284412</td>
-      <td>952.080428</td>
-      <td>3080.485325</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.178783</td>
-      <td>2.329816</td>
-      <td>4.375157</td>
-      <td>16.595897</td>
-      <td>45.094219</td>
-      <td>111.648490</td>
-      <td>327.776019</td>
-      <td>957.535278</td>
-      <td>3060.468843</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.236692</td>
-      <td>1.657093</td>
-      <td>6.129715</td>
-      <td>16.936223</td>
-      <td>42.938766</td>
-      <td>106.633653</td>
-      <td>326.079823</td>
-      <td>957.484624</td>
-      <td>3067.269305</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>0.628925</td>
-      <td>1.511681</td>
-      <td>6.948460</td>
-      <td>13.172124</td>
-      <td>42.288423</td>
-      <td>107.209117</td>
-      <td>321.793303</td>
-      <td>967.394947</td>
-      <td>3063.695556</td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>0.093657</td>
-      <td>2.964367</td>
-      <td>3.237465</td>
-      <td>10.358930</td>
-      <td>45.762912</td>
-      <td>109.267326</td>
-      <td>343.573150</td>
-      <td>959.594298</td>
-      <td>3050.002704</td>
-    </tr>
-    <tr>
-      <th>97</th>
-      <td>0.513840</td>
-      <td>0.281643</td>
-      <td>6.394966</td>
-      <td>13.333370</td>
-      <td>43.831143</td>
-      <td>108.073335</td>
-      <td>333.669589</td>
-      <td>964.514878</td>
-      <td>3054.382633</td>
-    </tr>
-    <tr>
-      <th>98</th>
-      <td>0.209917</td>
-      <td>1.271766</td>
-      <td>6.991731</td>
-      <td>13.529227</td>
-      <td>43.115481</td>
-      <td>104.241988</td>
-      <td>326.699154</td>
-      <td>944.033134</td>
-      <td>3083.473123</td>
-    </tr>
-    <tr>
-      <th>99</th>
-      <td>0.164175</td>
-      <td>0.485211</td>
-      <td>6.179781</td>
-      <td>14.778864</td>
-      <td>44.013765</td>
-      <td>105.355929</td>
-      <td>324.932512</td>
-      <td>958.082341</td>
-      <td>3069.922275</td>
-    </tr>
-  </tbody>
-</table>
-<p>100 rows × 9 columns</p>
-</div></div></div>
-</div>
+<p>Here, we are re-normalizing the both the impute counts with and without rescaling to the previously used target sum.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sc.pp.normalize_total(tenx_repr, target_sum=normalized_sum)
@@ -1315,65 +1113,43 @@ after_imputation = pd.concat([imputed_rescaled_df,merfish_df, tenx_norm_df, synt
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="results-after-imputation">
+<h2>2. Results after Imputation<a class="headerlink" href="#results-after-imputation" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.scatterplot(data=after_imputation, x=&quot;Gene 7&quot;, y =&quot;Gene 8&quot;, hue=&quot;Model&quot;, alpha=0.1, s=40)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for i in range(5): 
+    plt.figure() #this creates a new figure on which your plot will appear
+    sns.kdeplot(data=after_imputation, x=genes[i], y =genes[i+1], hue=&quot;Model&quot;, alpha=0.4, fill=True)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 7&#39;, ylabel=&#39;Gene 8&#39;&gt;
-</pre></div>
-</div>
+<img alt="_images/notebooks_28_0.png" src="_images/notebooks_28_0.png" />
 <img alt="_images/notebooks_28_1.png" src="_images/notebooks_28_1.png" />
+<img alt="_images/notebooks_28_2.png" src="_images/notebooks_28_2.png" />
+<img alt="_images/notebooks_28_3.png" src="_images/notebooks_28_3.png" />
+<img alt="_images/notebooks_28_4.png" src="_images/notebooks_28_4.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.kdeplot(data=after_imputation, x=&quot;Gene 7&quot;, y =&quot;Gene 8&quot;, hue=&quot;Model&quot;, alpha=0.3, fill=True)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for i in range(5): 
+    plt.figure() #this creates a new figure on which your plot will appear
+    sns.scatterplot(data=after_imputation, x=genes[i], y =genes[i+1], hue=&quot;Model&quot;, alpha=0.2, s=40)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 7&#39;, ylabel=&#39;Gene 8&#39;&gt;
-</pre></div>
-</div>
+<img alt="_images/notebooks_29_0.png" src="_images/notebooks_29_0.png" />
 <img alt="_images/notebooks_29_1.png" src="_images/notebooks_29_1.png" />
+<img alt="_images/notebooks_29_2.png" src="_images/notebooks_29_2.png" />
+<img alt="_images/notebooks_29_3.png" src="_images/notebooks_29_3.png" />
+<img alt="_images/notebooks_29_4.png" src="_images/notebooks_29_4.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="merfish-vs-10x-pre-imputation">
-<h2>MERFISH vs. 10x (pre-imputation)<a class="headerlink" href="#merfish-vs-10x-pre-imputation" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="raw-counts">
-<h2>Raw counts<a class="headerlink" href="#raw-counts" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.scatterplot(data=joint_data, x=&quot;Gene 5&quot;, y =&quot;Gene 6&quot;, hue=&quot;Model&quot;)
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 5&#39;, ylabel=&#39;Gene 6&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/notebooks_32_1.png" src="_images/notebooks_32_1.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.scatterplot(data=before_imputation, x=&quot;Gene 7&quot;, y =&quot;Gene 8&quot;, hue=&quot;Model&quot;, alpha=0.4, s=40)
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Gene 7&#39;, ylabel=&#39;Gene 8&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/notebooks_33_1.png" src="_images/notebooks_33_1.png" />
-</div>
-</div>
+<p>Thinking of inlcuding a metric to evaluate the performance of imputation. I could also write another blog post about the metric.</p>
 </section>
 </section>
 
