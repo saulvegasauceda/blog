@@ -330,6 +330,16 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#generating-synthetic-dataset">
    1. Generating Synthetic Dataset
   </a>
@@ -427,6 +437,16 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#generating-synthetic-dataset">
    1. Generating Synthetic Dataset
   </a>
@@ -517,10 +537,11 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="evaluating-magic-with-synthetic-dataset">
 <h1>Evaluating MAGIC with Synthetic Dataset<a class="headerlink" href="#evaluating-magic-with-synthetic-dataset" title="Permalink to this headline">#</a></h1>
 <p><a class="reference external" href="https://github.com/KrishnaswamyLab/MAGIC">MAGIC</a> is an imputation tool developed at the <a class="reference external" href="https://www.broadinstitute.org">Broad Institute</a> for single cell RNA-sequencing (scNRA-seq) data. Imputation can potentially help improve downstream analysis in scRNA-seq data pipelines due to the potential of denoising the high dropout rates (errerroneously observed 0s) that currently obscure gene-gene relationships. Despite this promise, MAGIC has failed to receive universal support on whether it successfully recuperates lost information. This is an attempt to discover the effects of MAGIC on a synthetic dataset to determine whether its claims holds true for a simple test case.</p>
-<div class="cell docutils container">
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
+<div class="cell tag_hide-inputs docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># imports
-import magic
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import magic
 import pandas as pd 
 import seaborn as sns
 import scanpy as sc
@@ -537,10 +558,12 @@ from scipy.stats import nbinom
 </div>
 </div>
 </div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Functions
-seed(1738)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>seed(1738)
 def create_synthetic_cells(rna_species_char, p, number_cells=100):
     &#39;&#39;&#39;
     Inputs
@@ -599,6 +622,7 @@ def rescale_data(data, target_data, rescale):
 </div>
 </div>
 </div>
+</section>
 <section id="generating-synthetic-dataset">
 <h2>1. Generating Synthetic Dataset<a class="headerlink" href="#generating-synthetic-dataset" title="Permalink to this headline">#</a></h2>
 <section id="intro-to-merfish-10x-scrna-seq">
@@ -630,7 +654,7 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
 <h4>Peeking at the data:<a class="headerlink" href="#peeking-at-the-data" title="Permalink to this headline">#</a></h4>
 <section id="synthetic-data">
 <h5>Synthetic Data:<a class="headerlink" href="#synthetic-data" title="Permalink to this headline">#</a></h5>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>synth_cells.head()
 </pre></div>
@@ -740,7 +764,7 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
 </section>
 <section id="merfish-data">
 <h5>MERFISH data:<a class="headerlink" href="#merfish-data" title="Permalink to this headline">#</a></h5>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_original_synth.head(5)
 </pre></div>
@@ -781,66 +805,66 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>2</td>
-      <td>7</td>
+      <td>3</td>
+      <td>8</td>
       <td>29</td>
-      <td>112</td>
-      <td>260</td>
-      <td>857</td>
-      <td>2686</td>
-      <td>9126</td>
+      <td>111</td>
+      <td>256</td>
+      <td>830</td>
+      <td>2707</td>
+      <td>9122</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>3</td>
+      <td>1</td>
       <td>5</td>
-      <td>20</td>
-      <td>99</td>
-      <td>265</td>
-      <td>900</td>
-      <td>2673</td>
-      <td>9300</td>
+      <td>19</td>
+      <td>111</td>
+      <td>262</td>
+      <td>899</td>
+      <td>2666</td>
+      <td>9292</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>2</th>
       <td>7</td>
       <td>1</td>
-      <td>13</td>
+      <td>14</td>
       <td>16</td>
-      <td>118</td>
-      <td>289</td>
-      <td>922</td>
-      <td>2736</td>
-      <td>9015</td>
+      <td>122</td>
+      <td>285</td>
+      <td>914</td>
+      <td>2784</td>
+      <td>8990</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0</td>
       <td>2</td>
-      <td>8</td>
-      <td>25</td>
-      <td>107</td>
-      <td>290</td>
-      <td>868</td>
-      <td>2577</td>
-      <td>8927</td>
+      <td>6</td>
+      <td>29</td>
+      <td>104</td>
+      <td>275</td>
+      <td>900</td>
+      <td>2567</td>
+      <td>8937</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>4</th>
       <td>6</td>
       <td>2</td>
-      <td>7</td>
-      <td>29</td>
-      <td>76</td>
-      <td>263</td>
-      <td>965</td>
-      <td>2690</td>
-      <td>8968</td>
+      <td>8</td>
+      <td>27</td>
+      <td>78</td>
+      <td>262</td>
+      <td>941</td>
+      <td>2705</td>
+      <td>8972</td>
       <td>MERFISH</td>
     </tr>
   </tbody>
@@ -850,7 +874,7 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
 </section>
 <section id="x-scrna-seq-data">
 <h5>10x scRNA-seq data:<a class="headerlink" href="#x-scrna-seq-data" title="Permalink to this headline">#</a></h5>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tenx_original_synth.head(5)
 </pre></div>
@@ -891,66 +915,66 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
     <tr>
       <th>0</th>
       <td>0</td>
+      <td>0</td>
       <td>1</td>
-      <td>3</td>
-      <td>9</td>
-      <td>32</td>
-      <td>85</td>
-      <td>277</td>
-      <td>897</td>
-      <td>3070</td>
+      <td>11</td>
+      <td>34</td>
+      <td>86</td>
+      <td>286</td>
+      <td>924</td>
+      <td>3058</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
-      <td>1</td>
       <td>2</td>
-      <td>10</td>
-      <td>39</td>
-      <td>91</td>
-      <td>299</td>
-      <td>902</td>
-      <td>3129</td>
+      <td>1</td>
+      <td>3</td>
+      <td>5</td>
+      <td>32</td>
+      <td>86</td>
+      <td>271</td>
+      <td>899</td>
+      <td>3072</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
+      <td>1</td>
       <td>0</td>
       <td>4</td>
-      <td>6</td>
-      <td>44</td>
-      <td>94</td>
-      <td>324</td>
-      <td>937</td>
-      <td>3049</td>
+      <td>4</td>
+      <td>38</td>
+      <td>97</td>
+      <td>333</td>
+      <td>898</td>
+      <td>2984</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0</td>
       <td>1</td>
-      <td>2</td>
+      <td>3</td>
       <td>7</td>
-      <td>30</td>
-      <td>95</td>
-      <td>275</td>
-      <td>875</td>
-      <td>2993</td>
+      <td>37</td>
+      <td>99</td>
+      <td>265</td>
+      <td>837</td>
+      <td>2963</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3</td>
-      <td>1</td>
-      <td>3</td>
-      <td>8</td>
-      <td>30</td>
-      <td>84</td>
-      <td>329</td>
-      <td>882</td>
-      <td>3009</td>
+      <td>2</td>
+      <td>2</td>
+      <td>6</td>
+      <td>13</td>
+      <td>29</td>
+      <td>98</td>
+      <td>324</td>
+      <td>856</td>
+      <td>2939</td>
       <td>10x scRNA-seq</td>
     </tr>
   </tbody>
@@ -973,11 +997,11 @@ for i in range(5):
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/notebooks_16_0.png" src="_images/notebooks_16_0.png" />
-<img alt="_images/notebooks_16_1.png" src="_images/notebooks_16_1.png" />
-<img alt="_images/notebooks_16_2.png" src="_images/notebooks_16_2.png" />
-<img alt="_images/notebooks_16_3.png" src="_images/notebooks_16_3.png" />
-<img alt="_images/notebooks_16_4.png" src="_images/notebooks_16_4.png" />
+<img alt="_images/notebooks_18_0.png" src="_images/notebooks_18_0.png" />
+<img alt="_images/notebooks_18_1.png" src="_images/notebooks_18_1.png" />
+<img alt="_images/notebooks_18_2.png" src="_images/notebooks_18_2.png" />
+<img alt="_images/notebooks_18_3.png" src="_images/notebooks_18_3.png" />
+<img alt="_images/notebooks_18_4.png" src="_images/notebooks_18_4.png" />
 </div>
 </div>
 <p>From the plots, we can see that the MERFISH distributions more closely resemble that of the Ground Truth dataset. Thus, our goal with imputation is to transform the 10x scRNA-seq data to become more similar to the MERFISH data.</p>
@@ -989,10 +1013,9 @@ for i in range(5):
 <section id="normalization">
 <h3>2.1: Normalization<a class="headerlink" href="#normalization" title="Permalink to this headline">#</a></h3>
 <p>Normalizing the RNA counts as a processing step for MAGIC. Using the MERFISH as basis for normalized sum to compare downstream. Before MAGIC, the 10x scRNA-seq data is normalized by the median RNA count of the dataset, then the values are square rooted.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
-merfish_original_synth = merfish_original_synth.drop(columns=[&quot;Model&quot;])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_original_synth = merfish_original_synth.drop(columns=[&quot;Model&quot;])
 tenx_original_synth = tenx_original_synth.drop(columns=[&quot;Model&quot;])
 
 # obtaining target sum for normalization
@@ -1014,6 +1037,16 @@ sc.pp.sqrt(tenx_repr)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1976/1306700857.py:9: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  merfish_repr = sc.AnnData(merfish_original_synth)
+/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/anndata/_core/anndata.py:121: ImplicitModificationWarning: Transforming to str index.
+  warnings.warn(&quot;Transforming to str index.&quot;, ImplicitModificationWarning)
+/tmp/ipykernel_1976/1306700857.py:10: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  tenx_repr = sc.AnnData(tenx_original_synth)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="running-magic">
@@ -1032,13 +1065,18 @@ tenx_repr.X = tenx_repr.X**2
 <section id="rescaling-imputed-counts">
 <h3>2.3: Rescaling Imputed Counts<a class="headerlink" href="#rescaling-imputed-counts" title="Permalink to this headline">#</a></h3>
 <p>Duplicating the results of MAGIC to determine whether rescaling after imputation is still necessary. Using a vestigial function <code class="docutils literal notranslate"><span class="pre">rescale_data()</span></code> from the <a class="reference external" href="https://github.com/KrishnaswamyLab">Krishnaswamy Lab</a>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
-tenx_rescaled_norm = tenx_repr.copy()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tenx_rescaled_norm = tenx_repr.copy()
 imputed_rescaled_df = tenx_rescaled_norm.to_df()
 imputed_rescaled_df = rescale_data(imputed_rescaled_df, tenx_raw, 99)
 imputed_rescaled = sc.AnnData(imputed_rescaled_df)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1976/2028333819.py:4: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  imputed_rescaled = sc.AnnData(imputed_rescaled_df)
 </pre></div>
 </div>
 </div>
@@ -1072,33 +1110,33 @@ after_imputation = pd.concat([imputed_rescaled_df,merfish_df, tenx_norm_df, synt
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for i in range(5): 
-    plt.figure() #this creates a new figure on which your plot will appear
+    plt.figure()
     sns.kdeplot(data=after_imputation, x=genes[i], y =genes[i+1], hue=&quot;Model&quot;, alpha=0.4, fill=True)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/notebooks_28_0.png" src="_images/notebooks_28_0.png" />
-<img alt="_images/notebooks_28_1.png" src="_images/notebooks_28_1.png" />
-<img alt="_images/notebooks_28_2.png" src="_images/notebooks_28_2.png" />
-<img alt="_images/notebooks_28_3.png" src="_images/notebooks_28_3.png" />
-<img alt="_images/notebooks_28_4.png" src="_images/notebooks_28_4.png" />
+<img alt="_images/notebooks_30_0.png" src="_images/notebooks_30_0.png" />
+<img alt="_images/notebooks_30_1.png" src="_images/notebooks_30_1.png" />
+<img alt="_images/notebooks_30_2.png" src="_images/notebooks_30_2.png" />
+<img alt="_images/notebooks_30_3.png" src="_images/notebooks_30_3.png" />
+<img alt="_images/notebooks_30_4.png" src="_images/notebooks_30_4.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for i in range(5): 
-    plt.figure() #this creates a new figure on which your plot will appear
+    plt.figure()
     sns.scatterplot(data=after_imputation, x=genes[i], y =genes[i+1], hue=&quot;Model&quot;, alpha=0.2, s=40)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/notebooks_29_0.png" src="_images/notebooks_29_0.png" />
-<img alt="_images/notebooks_29_1.png" src="_images/notebooks_29_1.png" />
-<img alt="_images/notebooks_29_2.png" src="_images/notebooks_29_2.png" />
-<img alt="_images/notebooks_29_3.png" src="_images/notebooks_29_3.png" />
-<img alt="_images/notebooks_29_4.png" src="_images/notebooks_29_4.png" />
+<img alt="_images/notebooks_31_0.png" src="_images/notebooks_31_0.png" />
+<img alt="_images/notebooks_31_1.png" src="_images/notebooks_31_1.png" />
+<img alt="_images/notebooks_31_2.png" src="_images/notebooks_31_2.png" />
+<img alt="_images/notebooks_31_3.png" src="_images/notebooks_31_3.png" />
+<img alt="_images/notebooks_31_4.png" src="_images/notebooks_31_4.png" />
 </div>
 </div>
 <p>Thinking of including a metric to evaluate the performance of imputation. I could also write another blog post about the metric.</p>
