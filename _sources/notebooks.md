@@ -1,14 +1,13 @@
 ---
 jupytext:
+  formats: md:myst
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.14.4
 kernelspec:
-    display_name: base
-    language: python
-    name: python3
+  display_name: Python 3
+  language: python
+  name: python3
 ---
 (file-types:notebooks)=
 # Evaluating MAGIC with Synthetic Dataset
@@ -19,9 +18,9 @@ kernelspec:
 
 +++
 
-#### Imports:
+##### Imports:
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [hide-input]
 
 import magic
@@ -43,7 +42,7 @@ pd.set_option('display.max_rows', None)
 
 ##### Functions:
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [hide-input]
 
 seed(1738)
@@ -117,7 +116,7 @@ Two popular methods for measuring RNA species post-mortem are: [MERFISH](https:/
 
 Sampling using a negative binomial distribution for the cells we will determine as the ground truth. Then, simulating both MERFISH & 10x scRNA-seq as a Bernoulli process with the capture rate serving as the probability of a success.
 
-```{code-cell} python
+```{code-cell} ipython3
 Rna_species_characteristic_numbers = [1, 3, 10, 30, 100, 300, 1000, 3000, 10000]
 
 synth_cells = create_synthetic_cells(Rna_species_characteristic_numbers, p=0.5)
@@ -136,7 +135,7 @@ tenx_original_synth["Model"] = "10x scRNA-seq"
 
 ##### Synthetic Data:
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [output_scroll]
 
 synth_cells
@@ -144,7 +143,7 @@ synth_cells
 
 ##### MERFISH data:
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [output_scroll]
 
 merfish_original_synth
@@ -152,7 +151,7 @@ merfish_original_synth
 
 ##### 10x scRNA-seq data:
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [output_scroll]
 
 tenx_original_synth
@@ -160,7 +159,7 @@ tenx_original_synth
 
 #### Plotting data:
 
-```{code-cell} python
+```{code-cell} ipython3
 before_imputation = pd.concat([synth_cells, merfish_original_synth, tenx_original_synth], ignore_index=True)
 genes = before_imputation.columns[:-1]
 
@@ -181,7 +180,7 @@ From the plots, we can see that the MERFISH distributions more closely resemble 
 
 Normalizing the RNA counts as a processing step for MAGIC. Using the MERFISH as basis for normalized sum to compare downstream. Before MAGIC, the 10x scRNA-seq data is normalized by the median RNA count of the dataset, then the values are square rooted.
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [hide-output]
 
 merfish_original_synth = merfish_original_synth.drop(columns=["Model"])
@@ -209,7 +208,7 @@ sc.pp.sqrt(tenx_repr)
 
 Running MAGIC with default parameters and normalizing the imputed counts back to the basis of the MERFISH median by squaring and normalizing sum.
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [hide-output]
 
 sce.pp.magic(tenx_repr, name_list='all_genes', solver='exact', n_jobs=-1)
@@ -220,7 +219,7 @@ tenx_repr.X = tenx_repr.X**2
 
 Duplicating the results of MAGIC to determine whether rescaling after imputation is still necessary. Using a vestigial function ```rescale_data()``` from the [Krishnaswamy Lab](https://github.com/KrishnaswamyLab).
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [hide-output]
 
 tenx_rescaled_norm = tenx_repr.copy()
@@ -231,7 +230,7 @@ imputed_rescaled = sc.AnnData(imputed_rescaled_df)
 
 Here, we are re-normalizing the both the impute counts with and without rescaling to the previously used target sum.
 
-```{code-cell} python
+```{code-cell} ipython3
 sc.pp.normalize_total(tenx_repr, target_sum=normalized_sum)
 sc.pp.normalize_total(imputed_rescaled, target_sum=normalized_sum)
 
@@ -251,13 +250,13 @@ after_imputation = pd.concat([imputed_rescaled_df,merfish_df, tenx_norm_df, synt
 
 ## 3. Results after Imputation
 
-```{code-cell} python
+```{code-cell} ipython3
 for i in range(5): 
     plt.figure()
     sns.kdeplot(data=after_imputation, x=genes[i], y =genes[i+1], hue="Model", alpha=0.4, fill=True)
 ```
 
-```{code-cell} python
+```{code-cell} ipython3
 for i in range(5): 
     plt.figure()
     sns.scatterplot(data=after_imputation, x=genes[i], y =genes[i+1], hue="Model", alpha=0.2, s=40)
