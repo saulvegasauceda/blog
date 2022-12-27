@@ -1,6 +1,5 @@
 magic-impute==3.0.0
 jupyter-book==0.13.1
-ghp-import==2.1.0
 numpy==1.22.4
 seaborn==0.11.2
 matplotlib==3.5.2
@@ -8,3 +7,4 @@ pandas==1.4.3
 anndata==0.8.0
 scikit-learn==1.1.1
 scanpy==1.9.1
+ghp-import
