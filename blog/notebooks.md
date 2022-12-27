@@ -9,7 +9,7 @@ kernelspec:
   language: python
   name: python3
 ---
-(file-types:notebooks)=
+
 # Evaluating MAGIC with Synthetic Dataset
 
 +++
