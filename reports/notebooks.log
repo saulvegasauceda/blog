@@ -34,48 +34,14 @@ from scipy.stats import nbinom
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mImportError[0m                               Traceback (most recent call last)
-Cell [0;32mIn[1], line 2[0m
-[1;32m      1[0m [38;5;66;03m# imports[39;00m
-[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mmagic[39;00m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 5[0m
 [1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m 
 [1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mseaborn[39;00m [38;5;28;01mas[39;00m [38;5;21;01msns[39;00m
+[0;32m----> 5[0m [38;5;28;01mimport[39;00m [38;5;21;01mscanpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01msc[39;00m
+[1;32m      6[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      7[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
 
-File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/magic/__init__.py:1[0m
-[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mmagic[39;00m [38;5;28;01mimport[39;00m MAGIC
-[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mversion[39;00m [38;5;28;01mimport[39;00m __version__
-[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mmagic[39;00m[38;5;21;01m.[39;00m[38;5;21;01mplot[39;00m
-
-File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/magic/magic.py:16[0m
-[1;32m     13[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdecomposition[39;00m [38;5;28;01mimport[39;00m PCA
-[1;32m     14[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mexceptions[39;00m [38;5;28;01mimport[39;00m NotFittedError
-[0;32m---> 16[0m [38;5;28;01mimport[39;00m [38;5;21;01mgraphtools[39;00m
-[1;32m     17[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
-[1;32m     18[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumbers[39;00m
-
-File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/graphtools/__init__.py:1[0m
-[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m [38;5;28;01mimport[39;00m Graph, from_igraph, read_pickle
-[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mversion[39;00m [38;5;28;01mimport[39;00m __version__
-
-File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/graphtools/api.py:8[0m
-[1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mpygsp[39;00m
-[1;32m      6[0m [38;5;28;01mimport[39;00m [38;5;21;01mtasklogger[39;00m
-[0;32m----> 8[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m [38;5;28;01mimport[39;00m base, graphs
-[1;32m     10[0m _logger [38;5;241m=[39m tasklogger[38;5;241m.[39mget_tasklogger([38;5;124m"[39m[38;5;124mgraphtools[39m[38;5;124m"[39m)
-[1;32m     13[0m [38;5;28;01mdef[39;00m [38;5;21mGraph[39m(
-[1;32m     14[0m     data,
-[1;32m     15[0m     n_pca[38;5;241m=[39m[38;5;28;01mNone[39;00m,
-[0;32m   (...)[0m
-[1;32m     39[0m     [38;5;241m*[39m[38;5;241m*[39mkwargs
-[1;32m     40[0m ):
-
-File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/graphtools/base.py:10[0m
-[1;32m      8[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdecomposition[39;00m [38;5;28;01mimport[39;00m PCA, TruncatedSVD
-[1;32m      9[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpreprocessing[39;00m [38;5;28;01mimport[39;00m normalize
-[0;32m---> 10[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m[38;5;21;01m.[39;00m[38;5;21;01mgraph[39;00m [38;5;28;01mimport[39;00m graph_shortest_path
-[1;32m     11[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m [38;5;28;01mimport[39;00m sparse
-[1;32m     12[0m [38;5;28;01mimport[39;00m [38;5;21;01mwarnings[39;00m
-
-[0;31mImportError[0m: cannot import name 'graph_shortest_path' from 'sklearn.utils.graph' (/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/sklearn/utils/graph.py)
-ImportError: cannot import name 'graph_shortest_path' from 'sklearn.utils.graph' (/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/sklearn/utils/graph.py)
+[0;31mModuleNotFoundError[0m: No module named 'scanpy'
+ModuleNotFoundError: No module named 'scanpy'
 
