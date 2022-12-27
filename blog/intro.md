@@ -1,16 +1,3 @@
-# Welcome to your Jupyter Book
+# Welcome to the site!
 
-This is a small sample book to give you a feel for how book content is
-structured.
-
-:::{note}
-Here is a note!
-:::
-
-And here is a code block:
-
-```
-e = mc^2
-```
-
-Check out the content pages bundled with this sample book to see more.
+Hello! My name is Saul and I am a junior at MIT studying Computer Science & Engineering. I will be using this site to share and go over any thing I find interesting throughout my research and academic journey. Throughout my time in MIT, I strived to learn about disease and health through data and see what rules of math and data science can help us leverage new insights. 
