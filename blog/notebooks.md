@@ -17,8 +17,9 @@ kernelspec:
 [MAGIC](https://github.com/KrishnaswamyLab/MAGIC) is an imputation tool developed at the [Broad Institute](https://www.broadinstitute.org) for single cell RNA-sequencing (scNRA-seq) data. Imputation can potentially help improve downstream analysis in scRNA-seq data pipelines due to the potential of denoising the high dropout rates (errerroneously observed 0s) that currently obscure gene-gene relationships. Despite this promise, MAGIC has failed to receive universal support on whether it successfully recuperates lost information. This is an attempt to discover the effects of MAGIC on a synthetic dataset to determine whether its claims holds true for a simple test case.
 
 +++
-
-##### Imports:
+```{code-cell} python
+#imports
+```
 
 ```{code-cell} python
 :tags: [hide-input]
@@ -40,7 +41,9 @@ from scipy.stats import nbinom
 pd.set_option('display.max_rows', None)
 ```
 
-##### Functions:
+```{code-cell} python
+#functions
+```
 
 ```{code-cell} python
 :tags: [hide-input]
