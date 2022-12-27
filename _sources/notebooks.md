@@ -6,11 +6,10 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.14.4
 kernelspec:
-  display_name: magic-env
-  language: python
-  name: python3
+    display_name: base
+    language: python
+    name: python3
 ---
-
 (file-types:notebooks)=
 # Evaluating MAGIC with Synthetic Dataset
 
@@ -38,6 +37,8 @@ from random import sample
 from random import choices
 from scipy.stats import rv_discrete, rv_continuous
 from scipy.stats import nbinom
+
+pd.set_option('display.max_rows', None)
 ```
 
 ##### Functions:
@@ -138,7 +139,7 @@ tenx_original_synth["Model"] = "10x scRNA-seq"
 ```{code-cell} ipython3
 :tags: [output_scroll]
 
-synth_cells.head()
+synth_cells
 ```
 
 ##### MERFISH data:
@@ -146,7 +147,7 @@ synth_cells.head()
 ```{code-cell} ipython3
 :tags: [output_scroll]
 
-merfish_original_synth.head(5)
+merfish_original_synth
 ```
 
 ##### 10x scRNA-seq data:
@@ -154,7 +155,7 @@ merfish_original_synth.head(5)
 ```{code-cell} ipython3
 :tags: [output_scroll]
 
-tenx_original_synth.head(5)
+tenx_original_synth
 ```
 
 #### Plotting data:
