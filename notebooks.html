@@ -182,7 +182,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/saulvegasauceda/blog/main?urlpath=tree/docs/notebooks.ipynb"
+        <a href="https://mybinder.org/v2/gh/saulvegasauceda/blog/main?urlpath=tree/docs/notebooks.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -274,6 +274,23 @@ title="Open an issue"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="_sources/notebooks.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
 title="Download source file"
 >
   
@@ -281,7 +298,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -658,7 +675,7 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
 <h4>Peeking at the data:<a class="headerlink" href="#peeking-at-the-data" title="Permalink to this headline">#</a></h4>
 <section id="synthetic-data">
 <h5>Synthetic Data:<a class="headerlink" href="#synthetic-data" title="Permalink to this headline">#</a></h5>
-<div class="cell tag_hide-cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>synth_cells.head()
 </pre></div>
@@ -768,7 +785,7 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
 </section>
 <section id="merfish-data">
 <h5>MERFISH data:<a class="headerlink" href="#merfish-data" title="Permalink to this headline">#</a></h5>
-<div class="cell tag_hide-cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>merfish_original_synth.head(5)
 </pre></div>
@@ -809,53 +826,53 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>3</td>
-      <td>6</td>
-      <td>27</td>
-      <td>107</td>
-      <td>262</td>
-      <td>845</td>
-      <td>2663</td>
-      <td>9108</td>
+      <td>2</td>
+      <td>8</td>
+      <td>26</td>
+      <td>116</td>
+      <td>261</td>
+      <td>829</td>
+      <td>2678</td>
+      <td>9139</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>3</td>
+      <td>2</td>
       <td>5</td>
-      <td>20</td>
-      <td>100</td>
-      <td>261</td>
+      <td>18</td>
+      <td>105</td>
+      <td>258</td>
       <td>896</td>
-      <td>2675</td>
-      <td>9362</td>
+      <td>2701</td>
+      <td>9320</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>8</td>
-      <td>1</td>
-      <td>14</td>
-      <td>15</td>
-      <td>113</td>
-      <td>284</td>
-      <td>928</td>
-      <td>2764</td>
-      <td>8981</td>
+      <td>7</td>
+      <td>0</td>
+      <td>16</td>
+      <td>17</td>
+      <td>117</td>
+      <td>285</td>
+      <td>913</td>
+      <td>2771</td>
+      <td>9005</td>
       <td>MERFISH</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0</td>
       <td>1</td>
-      <td>7</td>
-      <td>23</td>
-      <td>103</td>
-      <td>287</td>
-      <td>884</td>
-      <td>2589</td>
-      <td>8959</td>
+      <td>8</td>
+      <td>27</td>
+      <td>105</td>
+      <td>284</td>
+      <td>880</td>
+      <td>2585</td>
+      <td>8923</td>
       <td>MERFISH</td>
     </tr>
     <tr>
@@ -863,12 +880,12 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
       <td>7</td>
       <td>2</td>
       <td>7</td>
-      <td>29</td>
-      <td>77</td>
-      <td>261</td>
-      <td>935</td>
-      <td>2701</td>
-      <td>8964</td>
+      <td>28</td>
+      <td>79</td>
+      <td>259</td>
+      <td>951</td>
+      <td>2668</td>
+      <td>9001</td>
       <td>MERFISH</td>
     </tr>
   </tbody>
@@ -878,7 +895,7 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
 </section>
 <section id="x-scrna-seq-data">
 <h5>10x scRNA-seq data:<a class="headerlink" href="#x-scrna-seq-data" title="Permalink to this headline">#</a></h5>
-<div class="cell tag_hide-cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tenx_original_synth.head(5)
 </pre></div>
@@ -918,67 +935,67 @@ tenx_original_synth[&quot;Model&quot;] = &quot;10x scRNA-seq&quot;
   <tbody>
     <tr>
       <th>0</th>
+      <td>0</td>
       <td>1</td>
-      <td>1</td>
-      <td>3</td>
+      <td>2</td>
       <td>7</td>
-      <td>38</td>
-      <td>98</td>
-      <td>247</td>
-      <td>895</td>
-      <td>2998</td>
+      <td>32</td>
+      <td>79</td>
+      <td>282</td>
+      <td>880</td>
+      <td>3081</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
-      <td>3</td>
       <td>6</td>
-      <td>30</td>
-      <td>79</td>
-      <td>298</td>
-      <td>871</td>
-      <td>3154</td>
+      <td>35</td>
+      <td>82</td>
+      <td>327</td>
+      <td>893</td>
+      <td>3069</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>1</td>
+      <td>5</td>
       <td>4</td>
-      <td>3</td>
-      <td>49</td>
-      <td>83</td>
-      <td>303</td>
-      <td>938</td>
-      <td>2943</td>
+      <td>35</td>
+      <td>108</td>
+      <td>333</td>
+      <td>951</td>
+      <td>2970</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0</td>
-      <td>0</td>
-      <td>5</td>
-      <td>7</td>
+      <td>1</td>
+      <td>2</td>
+      <td>11</td>
       <td>35</td>
-      <td>104</td>
-      <td>282</td>
-      <td>853</td>
-      <td>2959</td>
+      <td>90</td>
+      <td>276</td>
+      <td>867</td>
+      <td>2931</td>
       <td>10x scRNA-seq</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0</td>
-      <td>2</td>
+      <td>3</td>
       <td>1</td>
-      <td>9</td>
-      <td>25</td>
-      <td>87</td>
-      <td>319</td>
-      <td>891</td>
-      <td>2978</td>
+      <td>3</td>
+      <td>7</td>
+      <td>20</td>
+      <td>92</td>
+      <td>339</td>
+      <td>903</td>
+      <td>2949</td>
       <td>10x scRNA-seq</td>
     </tr>
   </tbody>
@@ -1042,11 +1059,11 @@ sc.pp.sqrt(tenx_repr)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2007/1306700857.py:9: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1983/1306700857.py:9: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
   merfish_repr = sc.AnnData(merfish_original_synth)
 /opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/anndata/_core/anndata.py:121: ImplicitModificationWarning: Transforming to str index.
   warnings.warn(&quot;Transforming to str index.&quot;, ImplicitModificationWarning)
-/tmp/ipykernel_2007/1306700857.py:10: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+/tmp/ipykernel_1983/1306700857.py:10: FutureWarning: X.dtype being converted to np.float32 from int64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
   tenx_repr = sc.AnnData(tenx_original_synth)
 </pre></div>
 </div>
@@ -1084,7 +1101,7 @@ imputed_rescaled = sc.AnnData(imputed_rescaled_df)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2007/2028333819.py:4: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1983/2028333819.py:4: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
   imputed_rescaled = sc.AnnData(imputed_rescaled_df)
 </pre></div>
 </div>
