@@ -177,7 +177,7 @@ for g in genes:
 
 ```{code-cell} ipython3
 for i in range(5): 
-    plt.figure() #this creates a new figure on which your plot will appear
+    plt.figure()
     sns.kdeplot(data=before_imputation, x=genes[i], y =genes[i+1], hue="Model", alpha=0.2, fill=True)
 ```
 
