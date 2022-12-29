@@ -164,10 +164,18 @@ tenx_original_synth
 
 #### Plotting data:
 
+
 ```{code-cell} ipython3
 before_imputation = pd.concat([synth_cells, merfish_original_synth, tenx_original_synth], ignore_index=True)
 genes = before_imputation.columns[:-1]
 
+for g in genes:
+    plt.figure()
+    sns.kdeplot(data=before_imputation, x=g, hue="Model", alpha=.3,fill=True, linewidth=0)
+
+```
+
+```{code-cell} ipython3
 for i in range(5): 
     plt.figure() #this creates a new figure on which your plot will appear
     sns.kdeplot(data=before_imputation, x=genes[i], y =genes[i+1], hue="Model", alpha=0.2, fill=True)
