@@ -275,4 +275,6 @@ for i in range(5):
     sns.scatterplot(data=after_imputation, x=genes[i], y =genes[i+1], hue="Model", alpha=0.2, s=40)
 ```
 
-Thinking of including a metric to evaluate the performance of imputation. I am also considering whether to write a post about the evaluation metric my lab developed for comparing scRNA-seq data distributions.
+```{note}
+I am also considering whether to write a post about the evaluation metric my lab developed for comparing scRNA-seq data distributions.
+```
